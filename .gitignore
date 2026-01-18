@@ -1,0 +1,17 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node / JS
+node_modules/
+dist/
+.vite/
+.next/
+.nuxt/
+
+# Logs
+*.log
+
+# Env files
+.env
+.env.*
