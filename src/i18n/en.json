@@ -5,7 +5,100 @@
     "about": "About"
   },
   "cta": {
-    "reserve": "Reserve"
+    "reserve": "Reserve Table"
+  },
+  "home": {
+    "hero": {
+      "title": "Eating Well\nTo Live Well",
+      "subtitle": "100% Natural and Healthy",
+      "opening": "Grand Opening: February 14, 2026"
+    },
+    "introduction": {
+      "title": "Experience & Cuisine",
+      "subtitle": "Feel the TOMO Atmosphere and Taste",
+      "col1": {
+        "title": "Experience",
+        "subtitle": "A Unique Atmosphere and Service",
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      },
+      "col2": {
+        "title": "Cuisine",
+        "subtitle": "A Healthy Taste that you will Love",
+        "body": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      }
+    },
+    "gallery": {
+      "title": "Gallery"
+    },
+    "testimonials": {
+      "title": "How does it Taste?",
+      "subtitle": "Don't take it from us - Hear what our customers say",
+      "reviews": [
+        {
+          "text": "The most incredible dining experience in Palma. The moss walls create such a unique vibe.",
+          "author": "Sarah M."
+        },
+        {
+          "text": "Finally a place where healthy food actually tastes amazing. The pesto is out of this world!",
+          "author": "Marc D."
+        },
+        {
+          "text": "A true sanctuary. I could sit here for hours. The art, the food, the people - everything is perfect.",
+          "author": "Julia K."
+        },
+        {
+          "text": "Tomo has set a new standard for Santa Catalina. Premium yet so relaxed.",
+          "author": "Thomas B."
+        },
+        {
+          "text": "I love the concept of eating well to live well. You can taste the quality in every bite.",
+          "author": "Elena R."
+        },
+        {
+          "text": "The best mozzarella I've ever had outside of Italy. Highly recommended!",
+          "author": "David S."
+        }
+      ]
+    },
+    "philosophy": {
+      "title": "The Trinity of Taste",
+      "subtitle": "Simple ingredients, elevated to perfection.",
+      "card1": {
+        "title": "Natural",
+        "desc": "100% natural ingredients. No additives, just pure flavor."
+      },
+      "card2": {
+        "title": "Health",
+        "desc": "Designed for longevity. High protein, nutrient-rich."
+      },
+      "card3": {
+        "title": "Passion",
+        "desc": "Crafted with intention by chefs who care."
+      }
+    },
+    "experience": {
+      "title": "An Immersive Space",
+      "desc": "Dine surrounded by living moss walls and original artwork by Juri Art. A space designed to let you breathe, relax, and connect.",
+      "feature1": "Living Nature",
+      "feature2": "Original Art",
+      "feature3": "Warm Atmosphere"
+    },
+    "concept": {
+      "title": "Foodies and Healthy",
+      "subtitle": "A Challenge that we accepted and Mastered",
+      "header": "Our Concept",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor."
+    },
+    "story": {
+      "title": "Our Story",
+      "desc": "Founded by Luc and Tom in 2025, TOMO was born from a shared vision: food that makes sense. We believe in eating well to live well.",
+      "link": "More About TOMO"
+    },
+    "location": {
+      "title": "Visit Us",
+      "address": "Plaça de la Navegació, 17\nSanta Catalina, Palma",
+      "hours": "Tue - Sun: 12:00 - 23:00\nMon: Closed"
+    }
   },
   "footer": {
     "address": "Plaça de la Navegació, 17, Santa Catalina, Palma",

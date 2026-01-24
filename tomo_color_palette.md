@@ -1,4 +1,4 @@
-# Tomo Color Palette
+# Tomo Color Guide
 
 ## Brand Colors
 

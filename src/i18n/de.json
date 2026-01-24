@@ -5,7 +5,100 @@
     "about": "Über uns"
   },
   "cta": {
-    "reserve": "Reservieren"
+    "reserve": "Tisch Reservieren"
+  },
+  "home": {
+    "hero": {
+      "title": "Gut Essen\nUm Gut zu Leben",
+      "subtitle": "100% Natürlich und Gesund",
+      "opening": "Eröffnung: 14. Februar 2026"
+    },
+    "introduction": {
+      "title": "Erlebnis & Küche",
+      "subtitle": "Spüren Sie die TOMO Atmosphäre und den Geschmack",
+      "col1": {
+        "title": "Erlebnis",
+        "subtitle": "Eine einzigartige Atmosphäre und Service",
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      },
+      "col2": {
+        "title": "Küche",
+        "subtitle": "Ein gesunder Geschmack, den Sie lieben werden",
+        "body": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      }
+    },
+    "gallery": {
+      "title": "Galerie"
+    },
+    "testimonials": {
+      "title": "Wie schmeckt es?",
+      "subtitle": "Hören Sie nicht nur auf uns - Das sagen unsere Gäste",
+      "reviews": [
+        {
+          "text": "Das unglaublichste kulinarische Erlebnis in Palma. Die Mooswände schaffen eine so einzigartige Atmosphäre.",
+          "author": "Sarah M."
+        },
+        {
+          "text": "Endlich ein Ort, an dem gesundes Essen tatsächlich fantastisch schmeckt. Das Pesto ist nicht von dieser Welt!",
+          "author": "Marc D."
+        },
+        {
+          "text": "Ein wahres Heiligtum. Ich könnte hier stundenlang sitzen. Die Kunst, das Essen, die Menschen - alles ist perfekt.",
+          "author": "Julia K."
+        },
+        {
+          "text": "Tomo hat einen neuen Standard für Santa Catalina gesetzt. Premium und doch so entspannt.",
+          "author": "Thomas B."
+        },
+        {
+          "text": "Ich liebe das Konzept, gut zu essen, um gut zu leben. Man schmeckt die Qualität in jedem Bissen.",
+          "author": "Elena R."
+        },
+        {
+          "text": "Der beste Mozzarella, den ich je außerhalb Italiens gegessen habe. Sehr empfehlenswert!",
+          "author": "David S."
+        }
+      ]
+    },
+    "philosophy": {
+      "title": "Die Dreifaltigkeit des Geschmacks",
+      "subtitle": "Einfache Zutaten, perfektioniert.",
+      "card1": {
+        "title": "Natürlich",
+        "desc": "100% natürliche Zutaten. Keine Zusatzstoffe, nur reiner Genuss."
+      },
+      "card2": {
+        "title": "Gesundheit",
+        "desc": "Entwickelt für Langlebigkeit. Proteinreich und nährstoffreich."
+      },
+      "card3": {
+        "title": "Leidenschaft",
+        "desc": "Mit Absicht und Liebe von unseren Köchen zubereitet."
+      }
+    },
+    "experience": {
+      "title": "Ein immersiver Raum",
+      "desc": "Speisen Sie umgeben von lebenden Mooswänden und Originalkunst von Juri Art. Ein Raum, der Sie atmen, entspannen und verbinden lässt.",
+      "feature1": "Lebendige Natur",
+      "feature2": "Originalkunst",
+      "feature3": "Warme Atmosphäre"
+    },
+    "concept": {
+      "title": "Foodies und Gesund",
+      "subtitle": "Eine Herausforderung, die wir angenommen und gemeistert haben",
+      "header": "Unser Konzept",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor."
+    },
+    "story": {
+      "title": "Unsere Geschichte",
+      "desc": "Gegründet von Luc und Tom im Jahr 2025, entstand TOMO aus einer gemeinsamen Vision: Essen, das Sinn macht. Wir glauben daran, gut zu essen, um gut zu leben.",
+      "link": "Mehr über TOMO"
+    },
+    "location": {
+      "title": "Besuchen Sie uns",
+      "address": "Plaça de la Navegació, 17\nSanta Catalina, Palma",
+      "hours": "Di - So: 12:00 - 23:00\nMo: Geschlossen"
+    }
   },
   "footer": {
     "address": "Plaça de la Navegació, 17, Santa Catalina, Palma",
