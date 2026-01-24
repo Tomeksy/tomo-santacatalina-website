@@ -11,6 +11,7 @@ export default {
           red: '#DA240E',
           green: '#48BB78',
           cream: '#FFF8F0',
+          moss: '#2F4A3C',
           dark: '#111827',
           gray: '#374151',
           white: '#FFFFFF',

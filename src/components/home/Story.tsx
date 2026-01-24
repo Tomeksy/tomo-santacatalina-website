@@ -4,7 +4,7 @@ export const Story = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-24 bg-tomo-cream text-tomo-dark relative overflow-hidden">
+    <section className="py-24 bg-white text-tomo-dark relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <span className="text-tomo-red font-display font-bold tracking-widest uppercase mb-4 block">

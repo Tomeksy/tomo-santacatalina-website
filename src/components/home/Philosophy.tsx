@@ -23,7 +23,7 @@ export const Philosophy = () => {
   ];
 
   return (
-    <section className="py-24 bg-tomo-cream">
+    <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display font-bold text-tomo-dark mb-4">
@@ -40,7 +40,7 @@ export const Philosophy = () => {
               key={index} 
               className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 flex flex-col items-center text-center"
             >
-              <div className="bg-tomo-cream p-4 rounded-full mb-6">
+              <div className="bg-white p-4 rounded-full mb-6">
                 {card.icon}
               </div>
               <h3 className="text-2xl font-display font-bold text-tomo-dark mb-3">

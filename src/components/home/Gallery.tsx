@@ -34,7 +34,7 @@ export const Gallery = () => {
   };
 
   return (
-    <section className="py-24 bg-tomo-cream overflow-hidden">
+    <section className="py-24 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-display font-bold text-tomo-dark">

@@ -8,7 +8,7 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-tomo-cream sticky top-0 z-50 shadow-sm/50 backdrop-blur-sm bg-opacity-95">
+    <header className="bg-white sticky top-0 z-50 shadow-sm/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -65,7 +65,7 @@ export const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-tomo-cream border-t border-gray-100 absolute w-full shadow-lg">
+        <div className="md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
           <div className="px-4 pt-2 pb-6 space-y-4">
             <Link 
               to="/" 

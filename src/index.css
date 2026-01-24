@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply font-sans text-tomo-dark bg-tomo-cream antialiased;
+    @apply font-sans text-tomo-dark bg-white antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {

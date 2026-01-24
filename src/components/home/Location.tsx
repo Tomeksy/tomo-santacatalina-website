@@ -5,7 +5,7 @@ export const Location = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-24 bg-tomo-cream">
+    <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
           {/* Info Side */}
