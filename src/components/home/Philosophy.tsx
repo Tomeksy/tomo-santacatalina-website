@@ -26,7 +26,7 @@ export const Philosophy = () => {
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-tomo-dark mb-4">
+          <h2 data-reveal="float" className="text-4xl md:text-5xl font-display font-bold text-tomo-dark mb-4">
             {t.home.philosophy.title}
           </h2>
           <p className="text-xl text-tomo-gray max-w-2xl mx-auto">
@@ -38,6 +38,8 @@ export const Philosophy = () => {
           {cards.map((card, index) => (
             <div 
               key={index} 
+              data-reveal="float"
+              data-reveal-dir={index === 1 ? 'right' : 'left'}
               className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 flex flex-col items-center text-center"
             >
               <div className="bg-white p-4 rounded-full mb-6">

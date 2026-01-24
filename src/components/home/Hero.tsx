@@ -3,9 +3,10 @@ import { ArrowRight } from 'lucide-react';
 
 export const Hero = () => {
   const { t } = useTranslation();
+  const [titleLine1] = t.home.hero.title.split('\n');
 
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen supports-[height:100svh]:min-h-[100svh] sm:min-h-[600px] flex items-center justify-center overflow-hidden">
       {/* Background with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -25,9 +26,23 @@ export const Hero = () => {
         </div>
         
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white mb-6 leading-tight">
-          {t.home.hero.title.split('\n').map((line, i) => (
-            <span key={i} className="block">{line}</span>
-          ))}
+          <span className="block">{titleLine1}</span>
+          <span className="block relative h-[1.25em] overflow-hidden whitespace-nowrap text-5xl md:text-7xl lg:text-8xl">
+            {/* Stable accessible label (final state) */}
+            <span className="sr-only">To Live Well</span>
+
+            {/* Visual-only rotating subline (runs once) */}
+            <span aria-hidden="true" className="hero-rotate__phrase hero-rotate__phrase--a text-[clamp(2.4rem,10vw,3rem)] sm:text-5xl md:text-7xl lg:text-8xl">
+  To be Healthy
+</span>
+
+<span aria-hidden="true" className="hero-rotate__phrase hero-rotate__phrase--b text-[clamp(2.4rem,10vw,3rem)] sm:text-5xl md:text-7xl lg:text-8xl">
+  To be Energized
+</span>
+            <span aria-hidden="true" className="hero-rotate__phrase hero-rotate__phrase--final">
+              To Live Well
+            </span>
+          </span>
         </h1>
         
         <p className="text-xl md:text-2xl text-tomo-cream/90 font-light mb-10 max-w-2xl mx-auto">
@@ -46,7 +61,7 @@ export const Hero = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/50">
+      <div className="absolute bottom-4 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/50">
         <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
           <div className="w-1 h-2 bg-white/50 rounded-full"></div>
         </div>

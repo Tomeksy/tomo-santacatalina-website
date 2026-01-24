@@ -7,10 +7,15 @@ import { Concept } from '../components/home/Concept';
 import { Story } from '../components/home/Story';
 import { Location } from '../components/home/Location';
 import { Testimonials } from '../components/home/Testimonials';
+import { useRef } from 'react';
+import { useRevealOnce } from '../hooks/useRevealOnce';
 
 export const Home = () => {
+  const pageRef = useRef<HTMLDivElement | null>(null);
+  useRevealOnce(pageRef);
+
   return (
-    <div className="flex flex-col w-full">
+    <div ref={pageRef} className="flex flex-col w-full">
       <Hero />
       <Introduction />
       <Gallery />

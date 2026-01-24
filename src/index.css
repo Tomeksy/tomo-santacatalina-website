@@ -28,4 +28,200 @@
   .animate-float-up {
     animation: float-up 1s ease-out forwards;
   }
+
+  @keyframes hero-rotate-out {
+    0% {
+      opacity: 0;
+      transform: translateY(0.18em);
+      clip-path: inset(0 0 100% 0);
+    }
+    12% {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0 0);
+    }
+    70% {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0 0);
+    }
+    88% {
+      opacity: 0;
+      transform: translateY(-0.08em);
+      clip-path: inset(100% 0 0 0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-0.08em);
+      clip-path: inset(100% 0 0 0);
+    }
+  }
+
+  @keyframes hero-rotate-in {
+    0% {
+      opacity: 0;
+      transform: translateY(0.18em);
+      clip-path: inset(0 0 100% 0);
+    }
+    28% {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  .hero-rotate__phrase {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    opacity: 0;
+    will-change: opacity, transform, clip-path;
+  }
+
+  .hero-rotate__phrase--a {
+    animation: hero-rotate-out 2.1s ease-out 0s 1 both;
+  }
+
+  .hero-rotate__phrase--b {
+    animation: hero-rotate-out 2.1s ease-out 2.3s 1 both;
+  }
+
+  .hero-rotate__phrase--final {
+    animation: hero-rotate-in 1.4s ease-out 4.6s 1 forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-rotate__phrase {
+      animation: none !important;
+      opacity: 0 !important;
+      transform: none !important;
+      clip-path: none !important;
+    }
+    .hero-rotate__phrase--final {
+      opacity: 1 !important;
+    }
+  }
+
+  @keyframes reveal-float-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal-float-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes reveal-float-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes reveal-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes reveal-underline-draw {
+    from { stroke-dashoffset: 1; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  [data-reveal="float"],
+  [data-reveal="fade"] {
+    opacity: 0;
+  }
+
+  [data-reveal="float"] {
+    transform: translateY(10px);
+  }
+
+  [data-reveal="float"][data-reveal-dir="left"] {
+    transform: translateX(-10px);
+  }
+
+  [data-reveal="float"][data-reveal-dir="right"] {
+    transform: translateX(10px);
+  }
+
+  [data-reveal="fade"] {
+    transform: none;
+  }
+
+  [data-reveal="underline"] .reveal-underline path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  [data-reveal="float"].is-visible {
+    animation: reveal-float-in 650ms ease-out forwards;
+  }
+
+  [data-reveal="float"][data-reveal-dir="left"].is-visible {
+    animation: reveal-float-in-left 650ms ease-out forwards;
+  }
+
+  [data-reveal="float"][data-reveal-dir="right"].is-visible {
+    animation: reveal-float-in-right 650ms ease-out forwards;
+  }
+
+  @media (min-width: 768px) {
+    [data-reveal="float"][data-reveal-dir="left"],
+    [data-reveal="float"][data-reveal-dir="right"] {
+      transform: translateY(10px);
+    }
+
+    [data-reveal="float"][data-reveal-dir="left"].is-visible,
+    [data-reveal="float"][data-reveal-dir="right"].is-visible {
+      animation: reveal-float-in 650ms ease-out forwards;
+    }
+  }
+
+  [data-reveal="fade"].is-visible {
+    animation: reveal-fade-in 700ms ease-out forwards;
+  }
+
+  [data-reveal="underline"].is-visible .reveal-underline path {
+    animation: reveal-underline-draw 900ms ease-out forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal="float"],
+    [data-reveal="fade"] {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
+
+    [data-reveal="underline"] .reveal-underline path {
+      stroke-dashoffset: 0 !important;
+      animation: none !important;
+    }
+  }
 }

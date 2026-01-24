@@ -37,7 +37,7 @@ export const Gallery = () => {
     <section className="py-24 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-tomo-dark">
+          <h2 data-reveal="float" className="text-4xl md:text-5xl font-display font-bold text-tomo-dark">
             {t.home.gallery.title}
           </h2>
         </div>

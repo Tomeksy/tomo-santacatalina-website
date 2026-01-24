@@ -10,11 +10,13 @@ export const Experience = () => {
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* Image Grid */}
           <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4">
-            <img 
-              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop" 
-              alt="Restaurant Detail" 
-              className="w-full h-64 object-cover rounded-2xl translate-y-8"
-            />
+            <div data-reveal="float">
+              <img 
+                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop" 
+                alt="Restaurant Detail" 
+                className="w-full h-64 object-cover rounded-2xl translate-y-8"
+              />
+            </div>
             <img 
               src="https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?q=80&w=1000&auto=format&fit=crop" 
               alt="Art on Wall" 
@@ -24,8 +26,25 @@ export const Experience = () => {
 
           {/* Content */}
           <div className="w-full lg:w-1/2">
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-tomo-dark mb-6">
-              {t.home.experience.title}
+            <h2 data-reveal="underline" className="text-4xl md:text-5xl font-display font-bold text-tomo-dark mb-6">
+              <span className="relative inline-block">
+                {t.home.experience.title}
+                <svg
+                  aria-hidden="true"
+                  className="reveal-underline absolute left-0 -bottom-2 w-full h-3 text-tomo-green/80"
+                  viewBox="0 0 100 10"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M2 8 C 25 2, 75 2, 98 8"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    pathLength="1"
+                  />
+                </svg>
+              </span>
             </h2>
             <p className="text-lg text-tomo-gray mb-8 leading-relaxed">
               {t.home.experience.desc}

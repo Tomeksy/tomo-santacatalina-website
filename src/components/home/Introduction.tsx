@@ -7,7 +7,7 @@ export const Introduction = () => {
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-tomo-dark mb-4">
+          <h2 data-reveal="float" className="text-4xl md:text-5xl font-display font-bold text-tomo-dark mb-4">
             {t.home.introduction.title}
           </h2>
           <p className="text-xl text-tomo-gray max-w-2xl mx-auto">
@@ -19,7 +19,7 @@ export const Introduction = () => {
           {/* Row 1: Image Left, Text Right */}
           <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
             <div className="w-full md:w-1/2">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg group">
+              <div data-reveal="fade" className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg group">
                 <img 
                   src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1000&auto=format&fit=crop" 
                   alt="Restaurant Atmosphere" 
@@ -32,8 +32,25 @@ export const Introduction = () => {
               <span className="text-tomo-red font-display font-bold tracking-wider uppercase text-sm mb-2 block">
                 {t.home.introduction.col1.title}
               </span>
-              <h3 className="text-3xl font-display font-bold text-tomo-dark mb-6">
-                {t.home.introduction.col1.subtitle}
+              <h3 data-reveal="underline" className="text-3xl font-display font-bold text-tomo-dark mb-6">
+                <span className="relative inline-block">
+                  {t.home.introduction.col1.subtitle}
+                  <svg
+                    aria-hidden="true"
+                    className="reveal-underline absolute left-0 -bottom-2 w-full h-3 text-tomo-red/80"
+                    viewBox="0 0 100 10"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M2 8 C 25 2, 75 2, 98 8"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      pathLength="1"
+                    />
+                  </svg>
+                </span>
               </h3>
               <p className="text-tomo-gray text-lg leading-relaxed">
                 {t.home.introduction.col1.body}
@@ -57,8 +74,25 @@ export const Introduction = () => {
               <span className="text-tomo-green font-display font-bold tracking-wider uppercase text-sm mb-2 block">
                 {t.home.introduction.col2.title}
               </span>
-              <h3 className="text-3xl font-display font-bold text-tomo-dark mb-6">
-                {t.home.introduction.col2.subtitle}
+              <h3 data-reveal="underline" className="text-3xl font-display font-bold text-tomo-dark mb-6">
+                <span className="relative inline-block">
+                  {t.home.introduction.col2.subtitle}
+                  <svg
+                    aria-hidden="true"
+                    className="reveal-underline absolute left-0 -bottom-2 w-full h-3 text-tomo-green/80"
+                    viewBox="0 0 100 10"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M2 8 C 25 2, 75 2, 98 8"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      pathLength="1"
+                    />
+                  </svg>
+                </span>
               </h3>
               <p className="text-tomo-gray text-lg leading-relaxed">
                 {t.home.introduction.col2.body}
