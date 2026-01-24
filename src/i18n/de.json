@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "home": "Start",
+    "menu": "Menü",
+    "about": "Über uns"
+  },
+  "cta": {
+    "reserve": "Reservieren"
+  },
+  "footer": {
+    "address": "Plaça de la Navegació, 17, Santa Catalina, Palma",
+    "rights": "Alle Rechte vorbehalten."
+  }
+}
