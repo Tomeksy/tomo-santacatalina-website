@@ -1,152 +1,164 @@
-# Tomo Santa Catalina – Dev Brief
+# Tomo Santa Catalina – Dev Brief (Code-Truth)
 
 ## 0. Purpose of this Document
 
-This dev brief defines the architecture, constraints, and implementation approach for the Tomo Santa Catalina restaurant website. It is written to be executable by coding agents and human developers, with explicit fixed vs. open decisions (TBDs).
+This dev brief documents the **current, implemented** architecture and constraints of the Tomo Santa Catalina restaurant website.
 
-### Technical Requirements
+**Source of truth:** the codebase in this repository. If something is not clearly present in code/config, it must be treated as **unknown / not implemented**.
 
-**Deployment & Hosting**
-- Version Control: GitHub repository
-- Hosting: Netlify (continuous deployment from GitHub)
-- Build Tool: Vite
+### Technical Requirements (as implemented)
 
-**Code Structure**
-- Component-based architecture (React)
-- Clean, maintainable code
-- Accessibility best practices
-- Mobile-first, fully responsive
+**Build & runtime**
+- Build tool: Vite
+- Framework: React (SPA)
+- Language: TypeScript
+- Routing: React Router (`react-router-dom`)
+
+**Code structure**
+- Component-based architecture (React + TS)
+- Tailwind utility-first styling
+- Some accessibility patterns already present (e.g. `aria-label` on key buttons)
 
 ---
 
 ## 1. Scope
 
-**Pages (Total: 3)**
-- Homepage
-- Menu
-- About
+### Routes / Pages (as implemented)
 
-**Header**
-- Navigation for all pages
-- Language switcher (EN / ES / DE)
-- CTA button: "Reservieren" → opens `tel:` link directly
+- **Implemented route(s)**
+  - `/` → Homepage (`src/pages/Home.tsx`)
+- **Not implemented (in routing)**
+  - Menu page route/content (nav item exists but is disabled)
+  - About page route/content (nav item exists but is disabled)
 
-**Reasoning**
-Clean and beautiful restaurant website with clear purpose: present the restaurant, show the signature dishes, tell the story. No booking system, no e-commerce, no complex interactions.
+### Header (as implemented)
+
+- **Logo**: text “TOMO” linking to `/`
+- **Navigation items**
+  - Home (link)
+  - Menu (disabled, “Coming soon”)
+  - About (disabled, “Coming soon”)
+- **Language switcher**: `en` / `es` / `de`
+- **Primary CTA**
+  - Label comes from translations (`t.cta.reserve`)
+  - Opens a direct `tel:` link
+  - Current `tel:` target in code: `tel:+34000000000`
+
+**Note:** The same `tel:+34000000000` pattern is used in the Hero section and the Location/Contact section.
 
 ---
 
 ## 2. Non-Negotiable Constraints
 
-1. **Homepage first**: Build and complete the Homepage before starting Menu or About pages. No parallel page development.
+The constraints below are what the codebase currently enforces and/or encodes.
 
-2. **No i18n libraries**: Implement language switching via JSON files. One JSON file per language containing all UI strings. Browser language (`navigator.language`) determines default; user can override via language switcher.
-
-3. **Brand colors from palette**: All color decisions must derive from `tomo_color_palette.md`. The coding agent extends this palette for backgrounds, hover states, shadows, etc. while maintaining brand consistency.
-
-**Reasoning**
-- Homepage-first ensures a working, deployable product early.
-- JSON-based i18n keeps dependencies minimal and gives full control.
-- Central color palette prevents brand drift across components.
+1. **No i18n libraries**: Language switching is implemented via in-repo JSON translation files and a custom context/hook.
+2. **Phone-only reservation CTA**: “Reserve” actions are implemented as direct `tel:` links (no booking form/system).
+3. **Tailwind-based design tokens**: Brand colors and typography tokens are encoded in `tailwind.config.js` (no external palette document referenced by code).
 
 ---
 
-## 3. Tech Stack
+## 3. Tech Stack (from `package.json` + config)
 
 | Layer | Choice |
 |-------|--------|
-| Build | Vite |
-| Framework | React |
-| Styling | TBD (CSS Modules, Tailwind, or Styled Components – coding agent decides) |
-| i18n | Custom JSON mapping |
-| Deployment | GitHub → Netlify |
+| Build | Vite (`^5.1.4`) |
+| Framework | React (`^18.2.0`) |
+| Language | TypeScript (`^5.2.2`) |
+| Routing | React Router DOM (`^6.22.3`) |
+| Styling | Tailwind CSS (`^3.4.1`) + PostCSS + Autoprefixer |
+| Icons | `lucide-react` |
+| Deployment | Unknown / not configured in repo |
 
-**Reasoning**
-- Vite + React: Modern, fast, component-based. Familiar workflow.
-- Styling left open: Coding agent can choose based on preference and project fit.
-- No SSR/SSG framework (Astro, Next): SEO is not critical, and we want a fresh visual approach.
+**Build scripts**
+- `npm run dev` → Vite dev server
+- `npm run build` → `tsc && vite build`
+- `npm run preview` → `vite preview`
+
+**Notes**
+- Path alias is configured:
+  - Vite alias `@` → `./src` (`vite.config.ts`)
+  - TS path `@/*` → `src/*` (`tsconfig.json`)
+- Present but currently unused in `src/` (as of repository scan): `clsx`, `tailwind-merge`
 
 ---
 
 ## 4. Assets
 
-**Location:** 
-- `/assets` folder in repository
-- `/assets/logo_and_brand` contains designs, graphics and logo
-- `/assets/photos` contains photo shooting images
+**Repo folders present**
+- `/assets/logo_and_brand`
+- `/assets/photos`
 
-**Current contents:**
-- Logo files (photos empty for now)
+**What the UI currently uses (as implemented)**
+- Homepage imagery uses **external placeholder images** (e.g. Unsplash URLs), not local `/assets` files.
+- The Header logo is currently rendered as text (“TOMO”), not as an image asset.
 
-**Later additions:**
-- Restaurant photos (interior, food, guests)
-- Artist/Juri photos
-- Any other visual content
-
-**Approach:**
-- All assets live in the repo, not external storage (e.g. S3)
-- Coding agent can directly optimize (resize, crop, format conversion)
-- Netlify serves assets via CDN automatically
-
-**Reasoning**
-For a website of this scale (~10-30 images), repo-based assets are simpler and faster. No external storage workflow needed. Direct access for the coding agent enables efficient image optimization.
+**Unknown / not implemented**
+- Any in-repo image pipeline, resizing/cropping automation, or explicit asset serving strategy is not defined in code/config.
 
 ---
 
-## 5. Style Guide
+## 5. Style Guide (implemented tokens + conventions)
 
-### Color Palette
+### Design Tokens
 
-**Reference:** See `tomo_color_palette.md` for brand colors. Derive all additional colors (backgrounds, hover states, borders, shadows) from this palette.
+**Tailwind theme extension** lives in `tailwind.config.js` under `theme.extend`:
+- **Colors**: `tomo.red`, `tomo.green`, `tomo.cream`, `tomo.dark`, `tomo.gray`, `tomo.white`
+- **Fonts**
+  - `font-sans`: `Montserrat` (loaded via Google Fonts import in `src/index.css`)
+  - `font-display`: `Bernoru`, falling back to `Montserrat` (note: Bernoru is referenced but not loaded anywhere in code)
 
 ### Typography
 
-- Headings: Bold, clear, premium feel
-- Body: Easy to read, generous line height
-- Font choice: TBD – should feel natural and modern, not generic
+- Headings: base layer applies `font-display font-bold` to `h1..h6`
+- Body: base layer applies `font-sans` to `body`
 
-### Visual Style
+### Visual conventions already encoded
 
-- Natural, warm, premium aesthetic
-- Reflects the restaurant interior: moss, wood, calm
-- Generous whitespace
-- Rounded corners on interactive elements
-- Subtle shadows for depth
-- Smooth transitions on hover states
+- Rounded corners, shadows, hover transitions
+- Mobile-first responsiveness via Tailwind breakpoints (`md:`, `lg:`)
 
 ### Images
 
-Professional photos available (guests, interior, artist at work, food). These are central to the design and should be prominently featured.
-
-**IMPORTANT FOR CODING AGENT:** Use Placeholder Images, real photos will be added later manually.
+- Remote placeholder images are used throughout the Homepage.
+- Key images include `alt` text.
 
 ---
 
 ## 6. Internationalization (i18n)
 
-**Languages:** English, Spanish, German
+**Languages:** English (`en`), Spanish (`es`), German (`de`)
 
-**Implementation:**
-- One JSON file per language (e.g., `en.json`, `es.json`, `de.json`)
-- All UI strings referenced by key
-- Browser language detection on first load (`navigator.language`)
-- Manual override via header language switcher
-- Language preference stored in localStorage
+**Translation files**
+- `src/i18n/en.json`
+- `src/i18n/es.json`
+- `src/i18n/de.json`
 
-**Reasoning**
-No external i18n library needed for 3 languages and limited content. JSON mapping is simple, transparent, and fully controllable.
+**Implementation**
+- Provider: `LanguageProvider` in `src/context/LanguageContext.tsx`
+- Hook: `useTranslation()` returns `{ t, language, setLanguage }`
+- Default language:
+  - Starts as `'en'`
+  - On first mount: reads `localStorage.getItem('tomo-lang')`
+  - If missing/invalid: uses `navigator.language.split('-')[0]` when it matches one of `en|es|de`
+- Persistence:
+  - Saves to `localStorage` under key **`tomo-lang`**
 
 ---
 
-## 7. Non-Goals (MVP)
+## 7. Non-Goals / Not Implemented Yet (as of current code)
 
-**Out of scope for initial build:**
-- Menu page (build after Homepage complete)
-- About page (build after Homepage complete)
-- Online reservation system (CTA is phone call only)
-- Blog or news section
-- CMS integration
-- Analytics (can be added later)
+- Menu and About routes/pages are not implemented (only shown as disabled nav items).
+- Map integration is not implemented:
+  - The Location section currently shows a placeholder image with “View on Map” text.
+  - No map provider and no outbound map link is implemented.
+- No booking system (phone-only `tel:` CTA).
+- No CMS, blog/news, or analytics integrations.
 
-**Reasoning**
-MVP = Homepage live and polished. Subpages follow sequentially.
+---
+
+## 8. Deployment Facts (from repo state)
+
+- No `netlify.toml` is present.
+- No redirect configuration files were found (e.g. `_redirects`).
+- Any hosting/CI/CD configuration (Netlify or otherwise) appears to be managed **outside** this repository. 
