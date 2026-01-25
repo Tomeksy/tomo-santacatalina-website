@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../../hooks/useTranslation';
 import { Menu, X } from 'lucide-react';
+import tomoLogo from '../../../assets/logo_and_brand/tomologofull_header_size.png';
 
 export const Header = () => {
   const { t, language, setLanguage } = useTranslation();
@@ -9,12 +10,20 @@ export const Header = () => {
 
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Subtle neutral gradient behind logo area (left ~1/3) */}
+        <div className="pointer-events-none absolute inset-y-0 inset-x-0 bg-gradient-to-r from-gray-400/55 via-gray-200/18 to-transparent" />
+
+        <div className="relative flex justify-between items-center h-24">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="font-display font-bold text-2xl text-tomo-red tracking-wider">
-              TOMO
+            <Link to="/" className="inline-flex items-center">
+              <img
+                src={tomoLogo}
+                alt="TOMO"
+                className="h-20 w-auto"
+                loading="eager"
+              />
             </Link>
           </div>
 
