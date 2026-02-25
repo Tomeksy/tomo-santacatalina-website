@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useTranslation } from '../../hooks/useTranslation';
 
 export const Story = () => {
@@ -55,9 +56,12 @@ export const Story = () => {
           </div>
 
           <div className="mt-12">
-            <button className="text-tomo-red font-bold hover:text-red-700 transition-colors uppercase tracking-wider text-sm border-b-2 border-tomo-red pb-1">
+            <Link
+              to="/about"
+              className="text-tomo-red font-bold hover:text-red-700 transition-colors uppercase tracking-wider text-sm border-b-2 border-tomo-red pb-1"
+            >
               {t.home.story.link}
-            </button>
+            </Link>
           </div>
         </div>
       </div>

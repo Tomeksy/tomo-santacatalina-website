@@ -57,7 +57,8 @@ export const Concept = () => {
                 <span className="text-tomo-red font-display font-bold tracking-widest uppercase text-sm mb-4 block">
                   {t.home.concept.header}
                 </span>
-                <p className="text-lg md:text-xl leading-relaxed font-light text-tomo-gray">
+                {/* Preserve intentional paragraph breaks from translation copy. */}
+                <p className="text-lg md:text-xl leading-relaxed font-light text-tomo-gray whitespace-pre-line">
                   "{t.home.concept.body}"
                 </p>
                 

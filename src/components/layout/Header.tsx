@@ -32,9 +32,10 @@ export const Header = () => {
             <Link to="/" className="text-tomo-dark hover:text-tomo-red transition-colors font-medium">
               {t.nav.home}
             </Link>
-            {/* Disabled links for MVP */}
             <span className="text-tomo-gray/40 cursor-not-allowed" title="Coming soon">{t.nav.menu}</span>
-            <span className="text-tomo-gray/40 cursor-not-allowed" title="Coming soon">{t.nav.about}</span>
+            <Link to="/about" className="text-tomo-dark hover:text-tomo-red transition-colors font-medium">
+              {t.nav.about}
+            </Link>
             
             {/* Language Switcher */}
             <div className="flex items-center space-x-3 ml-4 border-l border-tomo-gray/20 pl-6">
@@ -86,9 +87,13 @@ export const Header = () => {
             <div className="px-3 py-2 text-lg font-medium text-tomo-gray/40">
               {t.nav.menu}
             </div>
-            <div className="px-3 py-2 text-lg font-medium text-tomo-gray/40">
+            <Link
+              to="/about"
+              className="block px-3 py-2 text-lg font-medium text-tomo-dark hover:text-tomo-red"
+              onClick={() => setIsMenuOpen(false)}
+            >
               {t.nav.about}
-            </div>
+            </Link>
             
             <div className="flex space-x-6 px-3 py-4 border-t border-gray-100 mt-2">
               {(['en', 'es', 'de'] as const).map((lang) => (
