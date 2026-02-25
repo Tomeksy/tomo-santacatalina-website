@@ -100,6 +100,23 @@
       "hours": "Di - So: 12:00 - 23:00\nMo: Geschlossen"
     }
   },
+  "about": {
+    "journey": {
+      "label": "The Journey",
+      "title": "From Idea to Reality in 11 Months",
+      "body": "Tomo started in March 2025 with a conversation between friends. By February 2026, we opened our first location in Santa Catalina, Palma de Mallorca.\n\nWhat happened in between? A lot of late nights, a clear vision, and people who believed in it from day one. Tomo grew fast — not because we rushed, but because the idea made sense. Healthy, natural, delicious. It's what people want. We just made it real."
+    },
+    "founders": {
+      "label": "The Founders",
+      "title": "The People Behind Tomo",
+      "body": "Tomo was founded by Luc, Andreas, and Tom — three people with different backgrounds but one shared conviction: food should make you feel good. While eating it, and after.\n\nWe're not chefs. We're not investors. We're people who saw a gap and decided to fill it. Tomo is the result."
+    },
+    "next": {
+      "label": "What's Next",
+      "title": "This Is Just the Beginning",
+      "body": "Santa Catalina is our first chapter, not our last. TOMO is designed to grow — into new formats, new locations, and new ways to bring healthy food to more people.\n\nWe're not in a rush. But we're not standing still either."
+    }
+  },
   "footer": {
     "address": "Plaça de la Navegació, 17, Santa Catalina, Palma",
     "rights": "Alle Rechte vorbehalten."

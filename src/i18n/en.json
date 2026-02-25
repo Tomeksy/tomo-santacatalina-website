@@ -19,12 +19,12 @@
       "col1": {
         "title": "Experience",
         "subtitle": "A Unique Atmosphere and Service",
-        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "body": "Step into a space designed to feel alive. Natural wood, original artwork by Juri Art, and a warm, grounded atmosphere invite you to slow down. TOMO is a place to sit, enjoy a glass of wine, and and let the atmosphere do the rest."
       },
       "col2": {
         "title": "Cuisine",
-        "subtitle": "A Healthy Taste that you will Love",
-        "body": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        "subtitle": "A Healthy Taste That You Will Love",
+        "body": "Everything on our menu is 100% natural. No shortcuts, no compromises. Our dishes are built around fresh, protein-rich ingredients with tomato, mozzarella, and pesto as the signature thread throughout. Food that's good for you — and tastes like it should."
       }
     },
     "gallery": {
@@ -77,27 +77,44 @@
       }
     },
     "experience": {
-      "title": "An Immersive Space",
-      "desc": "Dine surrounded by living moss walls and original artwork by Juri Art. A space designed to let you breathe, relax, and connect.",
-      "feature1": "Living Nature",
-      "feature2": "Original Art",
-      "feature3": "Warm Atmosphere"
+      "title": "A Place With Character",
+      "desc": "Icelandic and bun moss by MoosMoos — Art by Juri that you won't find anywhere else and Food that tastes like a guilty pleasure, but isn't.",
+      "feature1": "Living Moss by MoosMoos",
+      "feature2": "Original Art by Juri",
+      "feature3": "100% Natural Ingredients"
     },
     "concept": {
-      "title": "Foodies and Healthy",
-      "subtitle": "A Challenge that we accepted and Mastered",
+      "title": "Healthy Meets Delicious",
+      "subtitle": "Where Healthy Tastes Like It Should",
       "header": "Our Concept",
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor."
+      "body": "We started Tomo with a simple question: why does healthy food have to be boring? We believe eating well shouldn't taste like a sacrifice. So we built Tomo around one idea: 100% natural ingredients, zero compromises on flavor.\n\nOur answer is on the menu — fresh, protein-rich dishes that feel indulgent but aren't. Tomato, mozzarella, pesto as the foundation. The rest is flavor without guilt. Not because it's good for you. Because it's good."
     },
     "story": {
       "title": "Our Story",
-      "desc": "Founded by a team of friends in 2025, TOMO was born from a shared vision: food that makes sense. We believe in eating well to live well.",
+      "desc": "TOMO was born from a shared vision: food that makes sense. We believe in eating well to live well.",
       "link": "More About TOMO"
     },
     "location": {
       "title": "Visit Us",
       "address": "Plaça de la Navegació, 17\nSanta Catalina, Palma",
       "hours": "Tue - Sun: 12:00 - 23:00\nMon: Closed"
+    }
+  },
+  "about": {
+    "journey": {
+      "label": "The Journey",
+      "title": "From Idea to Reality in 11 Months",
+      "body": "Tomo started in March 2025 with a conversation between friends. By February 2026, we opened our first location in Santa Catalina, Palma de Mallorca.\n\nWhat happened in between? A lot of late nights, a clear vision, and people who believed in it from day one. Tomo grew fast — not because we rushed, but because the idea made sense. Healthy, natural, delicious. It's what people want. We just made it real."
+    },
+    "founders": {
+      "label": "The Founders",
+      "title": "The People Behind Tomo",
+      "body": "Tomo was founded by Luc, Andreas, and Tom — three people with different backgrounds but one shared conviction: food should make you feel good. While eating it, and after.\n\nWe're not chefs. We're not investors. We're people who saw a gap and decided to fill it. Tomo is the result."
+    },
+    "next": {
+      "label": "What's Next",
+      "title": "This Is Just the Beginning",
+      "body": "Santa Catalina is our first chapter, not our last. TOMO is designed to grow — into new formats, new locations, and new ways to bring healthy food to more people.\n\nWe're not in a rush. But we're not standing still either."
     }
   },
   "footer": {
