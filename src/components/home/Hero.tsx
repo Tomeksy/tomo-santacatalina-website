@@ -25,20 +25,17 @@ export const Hero = () => {
           </span>
         </div>
         
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white mb-6 leading-tight">
+        <h1 className="text-[clamp(2.5rem,calc(12.5vw_-_2rem),6rem)] font-display font-bold text-white mb-6 leading-tight">
           <span className="block">{titleLine1}</span>
-          <span className="block relative h-[1.25em] overflow-hidden whitespace-nowrap text-5xl md:text-7xl lg:text-8xl">
-            {/* Stable accessible label (final state) */}
+          <span className="block relative h-[1.25em] overflow-y-clip overflow-x-visible whitespace-nowrap">
             <span className="sr-only">To Live Well</span>
 
-            {/* Visual-only rotating subline (runs once) */}
-            <span aria-hidden="true" className="hero-rotate__phrase hero-rotate__phrase--a text-[clamp(2.4rem,10vw,3rem)] sm:text-5xl md:text-7xl lg:text-8xl">
-  To be Healthy
-</span>
-
-<span aria-hidden="true" className="hero-rotate__phrase hero-rotate__phrase--b text-[clamp(2.4rem,10vw,3rem)] sm:text-5xl md:text-7xl lg:text-8xl">
-  To be Energized
-</span>
+            <span aria-hidden="true" className="hero-rotate__phrase hero-rotate__phrase--a">
+              To be Healthy
+            </span>
+            <span aria-hidden="true" className="hero-rotate__phrase hero-rotate__phrase--b">
+              To be Energized
+            </span>
             <span aria-hidden="true" className="hero-rotate__phrase hero-rotate__phrase--final">
               To Live Well
             </span>
