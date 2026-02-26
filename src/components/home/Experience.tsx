@@ -1,4 +1,6 @@
 import { useTranslation } from '../../hooks/useTranslation';
+import imgCheers from '../../../assets/photos/tomo-cheers.png';
+import imgSign from '../../../assets/photos/tomo-sign-closeup.png';
 import { Check } from 'lucide-react';
 
 export const Experience = () => {
@@ -12,14 +14,14 @@ export const Experience = () => {
           <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4">
             <div data-reveal="float">
               <img 
-                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop" 
-                alt="Restaurant Detail" 
+                src={imgCheers}
+                alt="Guests clinking wine glasses at TOMO" 
                 className="w-full h-64 object-cover rounded-2xl translate-y-8"
               />
             </div>
             <img 
-              src="https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?q=80&w=1000&auto=format&fit=crop" 
-              alt="Art on Wall" 
+              src={imgSign}
+              alt="Hola TOMO sign" 
               className="w-full h-64 object-cover rounded-2xl"
             />
           </div>

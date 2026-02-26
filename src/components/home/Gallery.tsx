@@ -2,15 +2,24 @@ import { useState } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
+import imgInteriorMoss from '../../../assets/photos/tomo-interior-moss.png';
+import imgStorefront from '../../../assets/photos/tomo-storefront.png';
+import imgDishCaviar from '../../../assets/photos/tomo-dish-caviar.jpeg';
+import imgDishPesto from '../../../assets/photos/tomo-dish-pesto.jpeg';
+import imgDishCaviarSetting from '../../../assets/photos/tomo-dish-caviar-setting.jpeg';
+import imgDishesOverhead from '../../../assets/photos/tomo-dishes-overhead.jpeg';
+import imgDishTartare from '../../../assets/photos/tomo-dish-tartare.jpeg';
+import imgCheers from '../../../assets/photos/tomo-cheers.png';
+
 const IMAGES = [
-  "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?q=80&w=1000&auto=format&fit=crop"
+  imgInteriorMoss,
+  imgStorefront,
+  imgDishCaviar,
+  imgDishPesto,
+  imgDishCaviarSetting,
+  imgDishesOverhead,
+  imgDishTartare,
+  imgCheers,
 ];
 
 export const Gallery = () => {

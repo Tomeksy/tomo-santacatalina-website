@@ -1,0 +1,55 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@tailwind",
+      "description": "Purpose: Inject Tailwind generated layers. Contract: Accepts base, components, or utilities.",
+      "references": [
+        {
+          "name": "Tailwind @tailwind directive",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#tailwind"
+        }
+      ]
+    },
+    {
+      "name": "@apply",
+      "description": "Purpose: Inline existing utility classes into custom CSS rules. Contract: Accepts one or more Tailwind utility class names.",
+      "references": [
+        {
+          "name": "Tailwind @apply directive",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#apply"
+        }
+      ]
+    },
+    {
+      "name": "@layer",
+      "description": "Purpose: Place custom styles into Tailwind base, components, or utilities layer. Contract: Accepts base, components, or utilities.",
+      "references": [
+        {
+          "name": "Tailwind @layer directive",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#layer"
+        }
+      ]
+    },
+    {
+      "name": "@config",
+      "description": "Purpose: Set a custom Tailwind config file path per stylesheet. Contract: Accepts a config path string.",
+      "references": [
+        {
+          "name": "Tailwind @config directive",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#config"
+        }
+      ]
+    },
+    {
+      "name": "@screen",
+      "description": "Purpose: Target Tailwind breakpoints inside custom CSS. Contract: Accepts a configured screen key.",
+      "references": [
+        {
+          "name": "Tailwind @screen directive",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#screen"
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { useTranslation } from '../../hooks/useTranslation';
+import imgStorefront from '../../../assets/photos/tomo-storefront.png';
 import { MapPin, Clock, Phone } from 'lucide-react';
 
 export const Location = () => {
@@ -56,8 +57,8 @@ export const Location = () => {
           {/* Map Side (Placeholder) */}
           <div className="w-full md:w-1/2 bg-gray-200 min-h-[400px] relative group">
             <img 
-              src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop" 
-              alt="Map Location Placeholder" 
+              src={imgStorefront}
+              alt="TOMO storefront in Santa Catalina" 
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-transparent transition-colors">

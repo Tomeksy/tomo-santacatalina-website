@@ -1,4 +1,5 @@
 import { useTranslation } from '../../hooks/useTranslation';
+import heroImg from '../../../assets/photos/tomo-interior-moss.png';
 import { ArrowRight } from 'lucide-react';
 
 export const Hero = () => {
@@ -10,8 +11,8 @@ export const Hero = () => {
       {/* Background with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2574&auto=format&fit=crop" 
-          alt="Tomo Interior Atmosphere" 
+          src={heroImg}
+          alt="TOMO interior with moss wall"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-tomo-dark/40 backdrop-blur-[2px]"></div>

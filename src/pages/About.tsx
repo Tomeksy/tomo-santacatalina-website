@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
 import { useRevealOnce } from '../hooks/useRevealOnce';
+import imgFounders from '../../assets/photos/founder_luc_600x400.jpg';
 
 /* ── About page ──────────────────────────────────────────────
    Three sections: The Journey → The Founders → What's Next.
@@ -41,15 +42,16 @@ export const About = () => {
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
-            {/* Group photo placeholder — swap with real asset later */}
             <div className="w-full md:w-1/2">
               <div
                 data-reveal="fade"
-                className="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg bg-gray-200 flex items-center justify-center"
+                className="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg"
               >
-                <span className="text-tomo-gray/40 text-sm font-medium">
-                  Founders photo
-                </span>
+                <img
+                  src={imgFounders}
+                  alt="TOMO founders"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
