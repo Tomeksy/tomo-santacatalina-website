@@ -19,12 +19,12 @@
       "col1": {
         "title": "Erlebnis",
         "subtitle": "Eine einzigartige Atmosphäre und Service",
-        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "body": "Betreten Sie einen Raum, der lebendig wirkt. Naturholz, Originalkunst von Juri Art und eine warme, geerdete Atmosphäre laden Sie ein, zu entschleunigen. TOMO ist ein Ort, an dem Sie sitzen, ein Glas Wein genießen und die Atmosphäre den Rest übernehmen lassen."
       },
       "col2": {
         "title": "Küche",
         "subtitle": "Ein gesunder Geschmack, den Sie lieben werden",
-        "body": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        "body": "Alles auf unserer Speisekarte ist 100 % natürlich. Keine Abkürzungen, keine Kompromisse. Unsere Gerichte basieren auf frischen, proteinreichen Zutaten, mit Tomate, Mozzarella und Pesto als rotem Faden. Essen, das Ihnen guttut – und so schmeckt, wie es soll."
       }
     },
     "gallery": {
@@ -35,28 +35,28 @@
       "subtitle": "Hören Sie nicht nur auf uns - Das sagen unsere Gäste",
       "reviews": [
         {
-          "text": "Das unglaublichste kulinarische Erlebnis in Palma. Die Mooswände schaffen eine so einzigartige Atmosphäre.",
-          "author": "Sarah M."
+          "id": 1,
+          "author": "Kevin Kronschläger",
+          "badge": "Local Guide",
+          "reviewsLabel": "7 Rezensionen",
+          "photosLabel": "13 Fotos",
+          "timeAgoLabel": "2026-03-02",
+          "visitLabel": "Verzehr im Restaurant",
+          "priceLabel": "10–20 €",
+          "text": "Mega leckeres Essen 🤩😍\nGroßes Kompliment an das gesamte TOMO Team 🚀",
+          "ratingsLabel": "Essen: 5/5 | Service: 5/5 | Ambiente: 5/5"
         },
         {
-          "text": "Endlich ein Ort, an dem gesundes Essen tatsächlich fantastisch schmeckt. Das Pesto ist nicht von dieser Welt!",
-          "author": "Marc D."
-        },
-        {
-          "text": "Ein wahres Heiligtum. Ich könnte hier stundenlang sitzen. Die Kunst, das Essen, die Menschen - alles ist perfekt.",
-          "author": "Julia K."
-        },
-        {
-          "text": "Tomo hat einen neuen Standard für Santa Catalina gesetzt. Premium und doch so entspannt.",
-          "author": "Thomas B."
-        },
-        {
-          "text": "Ich liebe das Konzept, gut zu essen, um gut zu leben. Man schmeckt die Qualität in jedem Bissen.",
-          "author": "Elena R."
-        },
-        {
-          "text": "Der beste Mozzarella, den ich je außerhalb Italiens gegessen habe. Sehr empfehlenswert!",
-          "author": "David S."
+          "id": 2,
+          "author": "Sakahane",
+          "badge": "",
+          "reviewsLabel": "2 Rezensionen",
+          "photosLabel": "1 Foto",
+          "timeAgoLabel": "2026-02-26",
+          "visitLabel": "Abendessen",
+          "priceLabel": "",
+          "text": "spontan entdeckt und gleich vom Essen begeistert.\nPersonal und der Koch waren super nett\nEssen war sehr lecker und vielfältig.\nTipp: probiert unbedingt das Tomaten-Basilikum Cheesecake!! :)",
+          "ratingsLabel": ""
         }
       ]
     },
@@ -77,44 +77,44 @@
       }
     },
     "experience": {
-      "title": "Ein immersiver Raum",
-      "desc": "Speisen Sie umgeben von lebenden Mooswänden und Originalkunst von Juri Art. Ein Raum, der Sie atmen, entspannen und verbinden lässt.",
-      "feature1": "Lebendige Natur",
-      "feature2": "Originalkunst",
-      "feature3": "Warme Atmosphäre"
+      "title": "Ein Ort mit Charakter",
+      "desc": "Isländisches und Bollenmoos von MoosMoos — Kunst von Juri, die Sie sonst nirgends finden, und Essen, das wie eine sündige Versuchung schmeckt, aber keine ist.",
+      "feature1": "Lebendes Moos von MoosMoos",
+      "feature2": "Originalkunst von Juri",
+      "feature3": "100 % natürliche Zutaten"
     },
     "concept": {
-      "title": "Foodies und Gesund",
-      "subtitle": "Eine Herausforderung, die wir angenommen und gemeistert haben",
+      "title": "Gesund trifft köstlich",
+      "subtitle": "Wo gesund so schmeckt, wie es soll",
       "header": "Unser Konzept",
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor."
+      "body": "Wir haben TOMO mit einer einfachen Frage gestartet: Warum muss gesundes Essen langweilig sein? Wir glauben, gut zu essen sollte sich nicht wie Verzicht anfühlen. Deshalb haben wir TOMO auf einer Idee aufgebaut: 100 % natürliche Zutaten, null Kompromisse beim Geschmack.\n\nUnsere Antwort steht auf der Karte – frische, proteinreiche Gerichte, die sich wie ein Genuss mit schlechtem Gewissen anfühlen, es aber nicht sind. Tomate, Mozzarella und Pesto als Grundlage. Der Rest ist Geschmack ohne schlechtes Gewissen. Nicht, weil es gut für Sie ist. Sondern weil es gut ist."
     },
     "story": {
       "title": "Unsere Geschichte",
-      "desc": "Gegründet von einem Team von Freunden im Jahr 2025, entstand TOMO aus einer gemeinsamen Vision: Essen, das Sinn macht. Wir glauben daran, gut zu essen, um gut zu leben.",
+      "desc": "TOMO entstand aus einer gemeinsamen Vision: Essen, das Sinn macht. Wir glauben daran, gut zu essen, um gut zu leben.",
       "link": "Mehr über TOMO"
     },
     "location": {
       "title": "Besuchen Sie uns",
       "address": "Plaça de la Navegació, 17\nSanta Catalina, Palma",
-      "hours": "Di - So: 12:00 - 23:00\nMo: Geschlossen"
+      "hours": "Dienstag: Geschlossen\nMittwoch: 13:00 - 23:00\nDonnerstag: 13:00 - 23:00\nFreitag: 13:00 - 23:00\nSamstag: 13:00 - 23:00\nSonntag: 13:00 - 23:00\nMontag: Geschlossen"
     }
   },
   "about": {
     "journey": {
-      "label": "The Journey",
-      "title": "From Idea to Reality in 11 Months",
-      "body": "Tomo started in March 2025 with a conversation between friends. By February 2026, we opened our first location in Santa Catalina, Palma de Mallorca.\n\nWhat happened in between? A lot of late nights, a clear vision, and people who believed in it from day one. Tomo grew fast — not because we rushed, but because the idea made sense. Healthy, natural, delicious. It's what people want. We just made it real."
+      "label": "Der Weg",
+      "title": "Von der Idee zur Realität in 11 Monaten",
+      "body": "TOMO begann im März 2025 mit einem Gespräch unter Freunden. Im Februar 2026 eröffneten wir unseren ersten Standort in Santa Catalina, Palma de Mallorca.\n\nWas dazwischen passiert ist? Viele lange Nächte, eine klare Vision und Menschen, die von Tag eins an daran geglaubt haben. TOMO ist schnell gewachsen – nicht weil wir überhastet waren, sondern weil die Idee Sinn ergab. Gesund, natürlich, köstlich. Genau das wollen die Menschen. Wir haben es einfach Realität werden lassen."
     },
     "founders": {
-      "label": "The Founders",
-      "title": "The People Behind Tomo",
-      "body": "Tomo was founded by Luc, Andreas, and Tom — three people with different backgrounds but one shared conviction: food should make you feel good. While eating it, and after.\n\nWe're not chefs. We're not investors. We're people who saw a gap and decided to fill it. Tomo is the result."
+      "label": "Die Gründer",
+      "title": "Die Menschen hinter TOMO",
+      "body": "TOMO wurde von Luc, Tom und Andreas gegründet – drei Menschen mit unterschiedlichen Hintergründen, aber einer gemeinsamen Überzeugung: Essen soll Ihnen ein gutes Gefühl geben. Während des Essens und danach.\n\nWir sind zwei Jungs und ein unglaublicher Chef. Wir sind keine Investoren. Wir sind Menschen, die eine Lücke gesehen und beschlossen haben, sie zu schließen. TOMO ist das Ergebnis."
     },
     "next": {
-      "label": "What's Next",
-      "title": "This Is Just the Beginning",
-      "body": "Santa Catalina is our first chapter, not our last. TOMO is designed to grow — into new formats, new locations, and new ways to bring healthy food to more people.\n\nWe're not in a rush. But we're not standing still either."
+      "label": "Was als Nächstes kommt",
+      "title": "Das ist erst der Anfang",
+      "body": "Santa Catalina ist unser erstes Kapitel, nicht unser letztes. TOMO ist dafür gemacht zu wachsen – in neue Formate, neue Standorte und neue Wege, gesundes Essen zu mehr Menschen zu bringen.\n\nWir haben es nicht eilig. Aber wir bleiben auch nicht stehen."
     }
   },
   "footer": {

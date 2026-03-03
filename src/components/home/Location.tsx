@@ -1,6 +1,8 @@
 import { useTranslation } from '../../hooks/useTranslation';
-import imgStorefront from '../../../assets/photos/tomo-storefront.png';
+import imgGoogleMaps from '../../../assets/photos/google_maps_screenshot.png';
 import { MapPin, Clock, Phone } from 'lucide-react';
+
+const GOOGLE_MAPS_URL = 'https://maps.app.goo.gl/rSj9TtbXUx3RsKraA';
 
 export const Location = () => {
   const { t } = useTranslation();
@@ -46,27 +48,33 @@ export const Location = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-tomo-dark mb-1">Contact</h3>
-                  <a href="tel:+34000000000" className="text-tomo-gray hover:text-tomo-red transition-colors">
-                    +34 000 000 000
+                  <a href="tel:+34608979100" className="text-tomo-gray hover:text-tomo-red transition-colors">
+                    +34 608 979 100
                   </a>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Map Side (Placeholder) */}
-          <div className="w-full md:w-1/2 bg-gray-200 min-h-[400px] relative group">
+          {/* Map CTA contract: panel + button both open Google Maps in a new tab. */}
+          <a
+            href={GOOGLE_MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open TOMO location in Google Maps (new tab)"
+            className="w-full md:w-1/2 bg-gray-200 min-h-[400px] relative group block"
+          >
             <img 
-              src={imgStorefront}
-              alt="TOMO storefront in Santa Catalina" 
+              src={imgGoogleMaps}
+              alt="Google Maps location of TOMO in Palma" 
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-transparent transition-colors">
               <span className="bg-white px-6 py-3 rounded-full shadow-lg font-bold text-tomo-dark">
-                View on Map
+                View on Google Maps
               </span>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>

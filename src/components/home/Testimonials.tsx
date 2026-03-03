@@ -3,9 +3,55 @@ import { useTranslation } from '../../hooks/useTranslation';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 
 export const Testimonials = () => {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const reviews = t.home.testimonials.reviews;
+
+  /* Testimonials data contract:
+     - Source of truth: `home.testimonials.reviews` in i18n JSON files.
+     - To add a new review, copy one review object, increment `id`, and keep the same `id`
+       in `en.json`, `es.json`, and `de.json`.
+     - Display order is driven by `id`, so new entries appear automatically.
+     - `timeAgoLabel` now stores the review date as `YYYY-MM-DD`. The UI computes
+       localized relative time automatically (for example: "1 day ago", "hace 1 día").
+  */
+  const reviews = [...t.home.testimonials.reviews].sort((a, b) => a.id - b.id);
+  const DAY_MS = 24 * 60 * 60 * 1000;
+
+  /* Parse date string + calculate "x days ago" in active language.
+     Fallback contract: if date format is invalid, display raw value unchanged.
+  */
+  const getRelativeDateLabel = (dateValue: string) => {
+    const trimmed = dateValue.trim();
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(trimmed);
+    if (!match) return dateValue;
+
+    const year = Number(match[1]);
+    const month = Number(match[2]);
+    const day = Number(match[3]);
+    const reviewUtcTime = Date.UTC(year, month - 1, day);
+    const reviewDate = new Date(reviewUtcTime);
+
+    if (
+      reviewDate.getUTCFullYear() !== year ||
+      reviewDate.getUTCMonth() !== month - 1 ||
+      reviewDate.getUTCDate() !== day
+    ) {
+      return dateValue;
+    }
+
+    const today = new Date();
+    const todayUtcTime = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+    const diffDays = Math.floor((todayUtcTime - reviewUtcTime) / DAY_MS);
+
+    const localeMap = {
+      en: 'en-US',
+      es: 'es-ES',
+      de: 'de-DE',
+    } as const;
+
+    const formatter = new Intl.RelativeTimeFormat(localeMap[language], { numeric: 'auto' });
+    return formatter.format(-diffDays, 'day');
+  };
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % reviews.length);
@@ -15,55 +61,73 @@ export const Testimonials = () => {
     setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
   };
 
-  // Logic: Always track one index, render 2 items starting from that index on desktop
+  // Logic: Always track one index, render 2 items starting from that index on desktop.
   const getVisibleReviews = () => {
+    if (reviews.length <= 1) return [reviews[currentIndex]];
     const secondIndex = (currentIndex + 1) % reviews.length;
     return [reviews[currentIndex], reviews[secondIndex]];
   };
 
-  // Helper to generate a consistent color for the avatar based on name
+  // Helper to generate a consistent color for the avatar based on name.
   const getAvatarColor = (name: string) => {
     const colors = [
-      'bg-purple-600', 'bg-blue-600', 'bg-green-600', 
-      'bg-yellow-600', 'bg-red-600', 'bg-indigo-600', 
+      'bg-purple-600', 'bg-blue-600', 'bg-green-600',
+      'bg-yellow-600', 'bg-red-600', 'bg-indigo-600',
       'bg-pink-600', 'bg-orange-600'
     ];
     const index = name.length % colors.length;
     return colors[index];
   };
 
-  const ReviewCard = ({ review }: { review: typeof reviews[0] }) => (
-    <div className="bg-white p-8 rounded-xl shadow-md h-full flex flex-col border border-gray-100">
-      {/* Header: Avatar + Name + Time */}
-      <div className="flex items-center gap-4 mb-4">
-        <div className={`w-10 h-10 rounded-full ${getAvatarColor(review.author)} flex items-center justify-center text-white font-bold text-sm`}>
-          {review.author.charAt(0)}
-        </div>
-        <div>
-          <h4 className="font-bold text-gray-900 text-sm">{review.author}</h4>
-          <span className="text-xs text-gray-500">Local Guide • 2 reviews</span>
-        </div>
-        <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" 
-          alt="Google"
-          className="w-5 h-5 ml-auto opacity-50"
-        />
-      </div>
+  const ReviewCard = ({ review }: { review: (typeof reviews)[number] }) => {
+    const reviewerMeta = [review.badge, review.reviewsLabel, review.photosLabel].filter(Boolean).join(' • ');
+    const visitMeta = [review.visitLabel, review.priceLabel].filter(Boolean).join(' | ');
 
-      {/* Stars */}
-      <div className="flex gap-1 mb-4">
-        {[...Array(5)].map((_, i) => (
-          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-        ))}
-        <span className="text-xs text-gray-500 ml-2 mt-0.5">2 days ago</span>
-      </div>
+    return (
+      <div className="bg-white p-8 rounded-xl shadow-md h-full flex flex-col border border-gray-100">
+        {/* Header: avatar, profile meta, Google mark. */}
+        <div className="flex items-center gap-4 mb-4">
+          <div className={`w-10 h-10 rounded-full ${getAvatarColor(review.author)} flex items-center justify-center text-white font-bold text-sm`}>
+            {review.author.charAt(0)}
+          </div>
+          <div>
+            <h4 className="font-bold text-gray-900 text-sm">{review.author}</h4>
+            <span className="text-xs text-gray-500">{reviewerMeta}</span>
+          </div>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+            alt="Google"
+            className="w-5 h-5 ml-auto opacity-50"
+          />
+        </div>
 
-      {/* Review Text */}
-      <p className="text-gray-700 leading-relaxed text-sm flex-grow">
-        {review.text}
-      </p>
-    </div>
-  );
+        {/* Rating + recency line. */}
+        <div className="flex gap-1 mb-3">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+          ))}
+          <span className="text-xs text-gray-500 ml-2 mt-0.5">{getRelativeDateLabel(review.timeAgoLabel)}</span>
+        </div>
+
+        {/* Optional visit/price context for authenticity. */}
+        {visitMeta ? (
+          <p className="text-xs text-gray-500 mb-3">{visitMeta}</p>
+        ) : null}
+
+        {/* Main review text keeps line breaks from i18n content. */}
+        <p className="text-gray-700 leading-relaxed text-sm whitespace-pre-line flex-grow">
+          {review.text}
+        </p>
+
+        {/* Optional ratings summary pill (first review uses this). */}
+        {review.ratingsLabel ? (
+          <div className="mt-4 rounded-2xl bg-gray-100 px-4 py-3 text-sm font-semibold text-gray-700">
+            {review.ratingsLabel}
+          </div>
+        ) : null}
+      </div>
+    );
+  };
 
   return (
     <section className="py-24 bg-white relative overflow-hidden">
@@ -79,7 +143,7 @@ export const Testimonials = () => {
 
         <div className="relative max-w-5xl mx-auto">
           {/* Carousel Container */}
-          <div className="overflow-hidden py-4"> {/* Added py-4 to accommodate shadows */}
+          <div className="overflow-hidden py-4">
             <div className="flex gap-8">
               {/* Mobile: Show 1 review */}
               <div className="md:hidden w-full flex-shrink-0">
@@ -89,7 +153,7 @@ export const Testimonials = () => {
               {/* Desktop: Show 2 reviews */}
               <div className="hidden md:flex w-full gap-8">
                 {getVisibleReviews().map((review, idx) => (
-                  <div key={`${currentIndex}-${idx}`} className="w-1/2 flex-shrink-0">
+                  <div key={review.id ?? `${currentIndex}-${idx}`} className="w-1/2 flex-shrink-0">
                     <ReviewCard review={review} />
                   </div>
                 ))}

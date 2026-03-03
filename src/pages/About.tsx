@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
 import { useRevealOnce } from '../hooks/useRevealOnce';
-import imgFounders from '../../assets/photos/founder_luc_600x400.jpg';
+import imgFounders from '../../assets/photos/tomo_founders.jpg';
 
 /* ── About page ──────────────────────────────────────────────
    Three sections: The Journey → The Founders → What's Next.

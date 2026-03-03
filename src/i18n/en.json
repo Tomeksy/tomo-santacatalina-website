@@ -35,28 +35,28 @@
       "subtitle": "Don't take it from us - Hear what our customers say",
       "reviews": [
         {
-          "text": "The most incredible dining experience in Palma. The moss walls create such a unique vibe.",
-          "author": "Sarah M."
+          "id": 1,
+          "author": "Kevin Kronschläger",
+          "badge": "Local Guide",
+          "reviewsLabel": "7 reviews",
+          "photosLabel": "13 photos",
+          "timeAgoLabel": "2026-03-02",
+          "visitLabel": "Dine-in",
+          "priceLabel": "€10–20",
+          "text": "Mega delicious food 🤩😍\nBig compliment to the whole TOMO team 🚀",
+          "ratingsLabel": "Food: 5/5 | Service: 5/5 | Ambience: 5/5"
         },
         {
-          "text": "Finally a place where healthy food actually tastes amazing. The pesto is out of this world!",
-          "author": "Marc D."
-        },
-        {
-          "text": "A true sanctuary. I could sit here for hours. The art, the food, the people - everything is perfect.",
-          "author": "Julia K."
-        },
-        {
-          "text": "Tomo has set a new standard for Santa Catalina. Premium yet so relaxed.",
-          "author": "Thomas B."
-        },
-        {
-          "text": "I love the concept of eating well to live well. You can taste the quality in every bite.",
-          "author": "Elena R."
-        },
-        {
-          "text": "The best mozzarella I've ever had outside of Italy. Highly recommended!",
-          "author": "David S."
+          "id": 2,
+          "author": "Sakahane",
+          "badge": "",
+          "reviewsLabel": "2 reviews",
+          "photosLabel": "1 photo",
+          "timeAgoLabel": "2026-02-26",
+          "visitLabel": "Dinner",
+          "priceLabel": "",
+          "text": "Discovered it spontaneously and was immediately impressed by the food.\nThe staff and the chef were super friendly.\nThe food was very tasty and diverse.\nTip: definitely try the tomato-basil cheesecake!! :)",
+          "ratingsLabel": ""
         }
       ]
     },
@@ -87,7 +87,7 @@
       "title": "Healthy Meets Delicious",
       "subtitle": "Where Healthy Tastes Like It Should",
       "header": "Our Concept",
-      "body": "We started Tomo with a simple question: why does healthy food have to be boring? We believe eating well shouldn't taste like a sacrifice. So we built Tomo around one idea: 100% natural ingredients, zero compromises on flavor.\n\nOur answer is on the menu — fresh, protein-rich dishes that feel indulgent but aren't. Tomato, mozzarella, pesto as the foundation. The rest is flavor without guilt. Not because it's good for you. Because it's good."
+      "body": "We started TOMO with a simple question: why does healthy food have to be boring? We believe eating well shouldn't taste like a sacrifice. So we built TOMO around one idea: 100% natural ingredients, zero compromises on flavor.\n\nOur answer is on the menu — fresh, protein-rich dishes that feel indulgent but aren't. Tomato, mozzarella, pesto as the foundation. The rest is flavor without guilt. Not because it's good for you. Because it's good."
     },
     "story": {
       "title": "Our Story",
@@ -97,19 +97,19 @@
     "location": {
       "title": "Visit Us",
       "address": "Plaça de la Navegació, 17\nSanta Catalina, Palma",
-      "hours": "Tue - Sun: 12:00 - 23:00\nMon: Closed"
+      "hours": "Tuesday: Closed\nWednesday: 1-11pm\nThursday: 1-11pm\nFriday: 1-11pm\nSaturday: 1-11pm\nSunday: 1-11pm\nMonday: Closed"
     }
   },
   "about": {
     "journey": {
       "label": "The Journey",
       "title": "From Idea to Reality in 11 Months",
-      "body": "Tomo started in March 2025 with a conversation between friends. By February 2026, we opened our first location in Santa Catalina, Palma de Mallorca.\n\nWhat happened in between? A lot of late nights, a clear vision, and people who believed in it from day one. Tomo grew fast — not because we rushed, but because the idea made sense. Healthy, natural, delicious. It's what people want. We just made it real."
+      "body": "TOMO started in March 2025 with a conversation between friends. By February 2026, we opened our first location in Santa Catalina, Palma de Mallorca.\n\nWhat happened in between? A lot of late nights, a clear vision, and people who believed in it from day one. TOMO grew fast — not because we rushed, but because the idea made sense. Healthy, natural, delicious. It's what people want. We just made it real."
     },
     "founders": {
       "label": "The Founders",
-      "title": "The People Behind Tomo",
-      "body": "Tomo was founded by Luc, Andreas, and Tom — three people with different backgrounds but one shared conviction: food should make you feel good. While eating it, and after.\n\nWe're not chefs. We're not investors. We're people who saw a gap and decided to fill it. Tomo is the result."
+      "title": "The People Behind TOMO",
+      "body": "TOMO was founded by Luc, Tom, and Andreas — three people with different backgrounds but one shared conviction: food should make you feel good. While eating it, and after.\n\nWe're two guys and one incredible Chef. We're not investors. We're people who saw a gap and decided to fill it. TOMO is the result."
     },
     "next": {
       "label": "What's Next",

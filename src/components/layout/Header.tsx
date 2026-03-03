@@ -53,7 +53,7 @@ export const Header = () => {
             </div>
 
             <a 
-              href="tel:+34000000000" 
+              href="tel:+34608979100" 
               className="bg-tomo-red text-white px-6 py-2 rounded-full font-medium hover:bg-red-700 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5 duration-200"
             >
               {t.cta.reserve}
@@ -110,7 +110,7 @@ export const Header = () => {
             </div>
 
             <a 
-              href="tel:+34000000000" 
+              href="tel:+34608979100" 
               className="block w-full text-center bg-tomo-red text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors"
             >
               {t.cta.reserve}

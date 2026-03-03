@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../../hooks/useTranslation';
+import imgFounderLuc from '../../../assets/photos/founder_luc_profile_image.jpg';
+import imgFounderTom from '../../../assets/photos/founder_tom_profile_image.jpg';
+import imgFounderAndreas from '../../../assets/photos/founder_andreas_profile_image.jpg';
 
 export const Story = () => {
   const { t } = useTranslation();
 
   const founders = [
-    { name: "Luc Urbany", role: "Co-Founder" },
-    { name: "Tom Symantzyk", role: "Co-Founder" },
-    { name: "Michael Alois Wagner", role: "Co-Founder" },
-    { name: "Andreas Hoffmann", role: "Co-Founder" }
+    { name: "Luc Urbany", role: "Co-Founder", image: imgFounderLuc },
+    { name: "Tom Symantzyk", role: "Co-Founder", image: imgFounderTom },
+    { name: "Andreas Hoffmann", role: "Co-Founder", image: imgFounderAndreas }
   ];
 
   return (
@@ -25,12 +27,16 @@ export const Story = () => {
             "{t.home.story.desc}"
           </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+          {/* Founder cards intentionally stay image-first for quick recognition. */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
             {founders.map((founder, index) => (
               <div key={index} className="text-center group">
                 <div className="w-24 h-24 md:w-32 md:h-32 bg-tomo-stone rounded-full mb-4 mx-auto border-2 border-transparent group-hover:border-tomo-red/30 transition-colors overflow-hidden">
-                   {/* Placeholder */}
-                   <div className="w-full h-full bg-gray-200"></div>
+                  <img
+                    src={founder.image}
+                    alt={`${founder.name} profile`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <p className="font-display font-bold text-base md:text-lg leading-tight mb-1">{founder.name}</p>
                 <p className="text-xs md:text-sm text-tomo-gray uppercase tracking-wide">{founder.role}</p>

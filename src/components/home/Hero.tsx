@@ -49,7 +49,7 @@ export const Hero = () => {
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a 
-            href="tel:+34000000000" 
+            href="tel:+34608979100" 
             className="group bg-tomo-red text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
           >
             {t.cta.reserve}
