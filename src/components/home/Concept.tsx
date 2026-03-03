@@ -48,7 +48,10 @@ export const Concept = () => {
             </svg>
 
             {/* Paper/menu card */}
-            <div className="relative w-full max-w-2xl mx-auto mt-10 bg-gradient-to-b from-white to-gray-50/30 text-tomo-dark p-8 md:p-12 rounded-2xl ring-1 ring-black/5 shadow-[0_25px_70px_rgba(17,24,39,0.14),0_10px_25px_rgba(17,24,39,0.08)] transform transition-all duration-1000 animate-float-up overflow-hidden">
+            <div
+              data-reveal="float"
+              className="relative w-full max-w-2xl mx-auto mt-10 bg-gradient-to-b from-white to-gray-50/30 text-tomo-dark p-8 md:p-12 rounded-2xl ring-1 ring-black/5 shadow-[0_25px_70px_rgba(17,24,39,0.14),0_10px_25px_rgba(17,24,39,0.08)] transform transition-all duration-1000 overflow-hidden"
+            >
               {/* Paper texture + subtle light sweep */}
               <div className="pointer-events-none absolute inset-0 menu-card-grain opacity-[0.06]" />
               <div className="pointer-events-none absolute inset-0 menu-card-sheen opacity-[0.10]" />

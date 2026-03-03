@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -26,6 +26,58 @@ export const Gallery = () => {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  // Accessibility contract: modal supports Escape-close and focus restoration.
+  useEffect(() => {
+    if (!selectedImage) return;
+
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    closeButtonRef.current?.focus();
+
+    const getFocusableElements = () => {
+      if (!modalRef.current) return [];
+      const selector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+      return Array.from(modalRef.current.querySelectorAll<HTMLElement>(selector)).filter(
+        (element) => !element.hasAttribute('disabled') && element.getAttribute('aria-hidden') !== 'true'
+      );
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedImage(null);
+        return;
+      }
+
+      if (event.key === 'Tab') {
+        const focusableElements = getFocusableElements();
+        if (focusableElements.length === 0) {
+          event.preventDefault();
+          return;
+        }
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+        const activeElement = document.activeElement;
+
+        if (event.shiftKey && activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        } else if (!event.shiftKey && activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      previousFocusRef.current?.focus();
+    };
+  }, [selectedImage]);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % IMAGES.length);
@@ -55,20 +107,27 @@ export const Gallery = () => {
           {/* Carousel Container */}
           <div className="flex gap-4 md:gap-8 overflow-hidden">
             {/* Mobile: Show 1 image (just current) */}
-            <div className="md:hidden w-full aspect-[4/3] relative rounded-2xl overflow-hidden cursor-pointer" onClick={() => setSelectedImage(IMAGES[currentIndex])}>
+            <button
+              type="button"
+              aria-label={`Open gallery image ${currentIndex + 1}`}
+              className="md:hidden w-full aspect-[4/3] relative rounded-2xl overflow-hidden cursor-pointer bg-transparent border-0 p-0"
+              onClick={() => setSelectedImage(IMAGES[currentIndex])}
+            >
               <img 
                 src={IMAGES[currentIndex]} 
                 alt="Gallery" 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
-            </div>
+            </button>
 
             {/* Desktop: Show 2 images */}
             <div className="hidden md:flex w-full gap-8">
               {getVisibleImages().map((img, idx) => (
-                <div 
+                <button
+                  type="button"
                   key={`${currentIndex}-${idx}`} 
-                  className="w-1/2 aspect-[16/9] relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow"
+                  aria-label={`Open gallery image ${(currentIndex + idx) % IMAGES.length + 1}`}
+                  className="w-1/2 aspect-[16/9] relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow bg-transparent border-0 p-0"
                   onClick={() => setSelectedImage(img)}
                 >
                   <img 
@@ -76,7 +135,7 @@ export const Gallery = () => {
                     alt={`Gallery ${idx}`} 
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -84,14 +143,14 @@ export const Gallery = () => {
           {/* Navigation Buttons */}
           <button 
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-tomo-dark p-3 rounded-full shadow-lg backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-tomo-dark p-3 rounded-full shadow-lg backdrop-blur-sm transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
             aria-label="Previous image"
           >
             <ChevronLeft size={24} />
           </button>
           <button 
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-tomo-dark p-3 rounded-full shadow-lg backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-tomo-dark p-3 rounded-full shadow-lg backdrop-blur-sm transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
             aria-label="Next image"
           >
             <ChevronRight size={24} />
@@ -115,10 +174,23 @@ export const Gallery = () => {
 
       {/* Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setSelectedImage(null)}>
+        <div
+          ref={modalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Gallery image preview"
+          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
           <button 
-            onClick={() => setSelectedImage(null)}
+            ref={closeButtonRef}
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              setSelectedImage(null);
+            }}
             className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+            aria-label="Close image preview"
           >
             <X size={40} />
           </button>

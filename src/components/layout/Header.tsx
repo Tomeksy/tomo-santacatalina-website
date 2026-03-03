@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from '../../hooks/useTranslation';
 import { Menu, X } from 'lucide-react';
 import tomoLogo from '../../../assets/logo_and_brand/tomologofull_header_size.png';
@@ -29,13 +29,20 @@ export const Header = () => {
 
           {/* Desktop Nav — visible at lg (1024px+), hamburger on tablet */}
           <nav className="hidden lg:flex space-x-8 items-center">
-            <Link to="/" className="text-tomo-dark hover:text-tomo-red transition-colors font-medium">
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) => `transition-colors font-medium ${isActive ? 'text-tomo-red' : 'text-tomo-dark hover:text-tomo-red'}`}
+            >
               {t.nav.home}
-            </Link>
+            </NavLink>
             <span className="text-tomo-gray/40 cursor-not-allowed" title="Coming soon">{t.nav.menu}</span>
-            <Link to="/about" className="text-tomo-dark hover:text-tomo-red transition-colors font-medium">
+            <NavLink
+              to="/about"
+              className={({ isActive }) => `transition-colors font-medium ${isActive ? 'text-tomo-red' : 'text-tomo-dark hover:text-tomo-red'}`}
+            >
               {t.nav.about}
-            </Link>
+            </NavLink>
             
             {/* Language Switcher */}
             <div className="flex items-center space-x-3 ml-4 border-l border-tomo-gray/20 pl-6">
@@ -77,23 +84,24 @@ export const Header = () => {
       {isMenuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
           <div className="px-4 pt-2 pb-6 space-y-4">
-            <Link 
+            <NavLink
               to="/" 
-              className="block px-3 py-2 text-lg font-medium text-tomo-dark hover:text-tomo-red"
+              end
+              className={({ isActive }) => `block px-3 py-2 text-lg font-medium ${isActive ? 'text-tomo-red' : 'text-tomo-dark hover:text-tomo-red'}`}
               onClick={() => setIsMenuOpen(false)}
             >
               {t.nav.home}
-            </Link>
+            </NavLink>
             <div className="px-3 py-2 text-lg font-medium text-tomo-gray/40">
               {t.nav.menu}
             </div>
-            <Link
+            <NavLink
               to="/about"
-              className="block px-3 py-2 text-lg font-medium text-tomo-dark hover:text-tomo-red"
+              className={({ isActive }) => `block px-3 py-2 text-lg font-medium ${isActive ? 'text-tomo-red' : 'text-tomo-dark hover:text-tomo-red'}`}
               onClick={() => setIsMenuOpen(false)}
             >
               {t.nav.about}
-            </Link>
+            </NavLink>
             
             <div className="flex space-x-6 px-3 py-4 border-t border-gray-100 mt-2">
               {(['en', 'es', 'de'] as const).map((lang) => (
@@ -111,7 +119,7 @@ export const Header = () => {
 
             <a 
               href="tel:+34608979100" 
-              className="block w-full text-center bg-tomo-red text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              className="block w-full text-center bg-tomo-red text-white px-6 py-3 rounded-full font-medium hover:bg-red-700 transition-colors"
             >
               {t.cta.reserve}
             </a>

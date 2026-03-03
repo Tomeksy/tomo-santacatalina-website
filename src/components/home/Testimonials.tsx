@@ -161,22 +161,49 @@ export const Testimonials = () => {
             </div>
           </div>
 
-          {/* Navigation Buttons (Outside container on desktop) */}
-          <button 
-            onClick={prevSlide}
-            className="absolute -left-4 md:-left-16 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-700 p-3 rounded-full shadow-lg transition-all border border-gray-100"
-            aria-label="Previous review"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <button 
-            onClick={nextSlide}
-            className="absolute -right-4 md:-right-16 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-700 p-3 rounded-full shadow-lg transition-all border border-gray-100"
-            aria-label="Next review"
-          >
-            <ChevronRight size={24} />
-          </button>
+          {/* Bugfix contract:
+              Keep desktop arrows outside the cards and render separate mobile controls below cards
+              so no button can overlap testimonial copy at narrow widths. */}
+          {reviews.length > 1 ? (
+            <>
+              <button 
+                onClick={prevSlide}
+                className="hidden md:inline-flex absolute md:-left-16 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-700 p-3 rounded-full shadow-lg transition-all border border-gray-100"
+                aria-label="Previous review"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button 
+                onClick={nextSlide}
+                className="hidden md:inline-flex absolute md:-right-16 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-700 p-3 rounded-full shadow-lg transition-all border border-gray-100"
+                aria-label="Next review"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </>
+          ) : null}
         </div>
+
+        {reviews.length > 1 ? (
+          <div className="mt-6 flex items-center justify-center gap-4 md:hidden">
+            <button
+              type="button"
+              onClick={prevSlide}
+              className="inline-flex items-center justify-center bg-white hover:bg-gray-100 text-gray-700 p-3 rounded-full shadow-lg transition-all border border-gray-100"
+              aria-label="Previous review"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button
+              type="button"
+              onClick={nextSlide}
+              className="inline-flex items-center justify-center bg-white hover:bg-gray-100 text-gray-700 p-3 rounded-full shadow-lg transition-all border border-gray-100"
+              aria-label="Next review"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+        ) : null}
 
         {/* Indicators */}
         <div className="flex justify-center mt-12 gap-2">

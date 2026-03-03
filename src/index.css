@@ -29,49 +29,39 @@
     animation: float-up 1s ease-out forwards;
   }
 
+  /* Hero rotation bugfix:
+     Use opacity + subtle translate transitions because clip-path was clipping letters on desktop. */
   @keyframes hero-rotate-out {
     0% {
       opacity: 0;
-      transform: translateY(0.18em);
-      clip-path: inset(0 0 100% 0);
+      transform: translateY(0.22em);
     }
     12% {
       opacity: 1;
       transform: translateY(0);
-      clip-path: inset(0 0 0 0);
     }
-    70% {
+    68% {
       opacity: 1;
       transform: translateY(0);
-      clip-path: inset(0 0 0 0);
-    }
-    88% {
-      opacity: 0;
-      transform: translateY(-0.08em);
-      clip-path: inset(100% 0 0 0);
     }
     100% {
       opacity: 0;
-      transform: translateY(-0.08em);
-      clip-path: inset(100% 0 0 0);
+      transform: translateY(-0.2em);
     }
   }
 
   @keyframes hero-rotate-in {
     0% {
       opacity: 0;
-      transform: translateY(0.18em);
-      clip-path: inset(0 0 100% 0);
+      transform: translateY(0.22em);
     }
-    28% {
+    30% {
       opacity: 1;
       transform: translateY(0);
-      clip-path: inset(0 0 0 0);
     }
     100% {
       opacity: 1;
       transform: translateY(0);
-      clip-path: inset(0 0 0 0);
     }
   }
 
@@ -79,11 +69,13 @@
     position: absolute;
     inset: 0;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     width: 100%;
     opacity: 0;
-    will-change: opacity, transform, clip-path;
+    line-height: 1.05;
+    pointer-events: none;
+    will-change: opacity, transform;
   }
 
   .hero-rotate__phrase--a {
@@ -103,7 +95,6 @@
       animation: none !important;
       opacity: 0 !important;
       transform: none !important;
-      clip-path: none !important;
     }
     .hero-rotate__phrase--final {
       opacity: 1 !important;

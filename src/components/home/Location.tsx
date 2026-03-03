@@ -12,7 +12,7 @@ export const Location = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
           {/* Info Side */}
-          <div className="w-full md:w-1/2 p-12 flex flex-col justify-center">
+          <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center">
             <h2 data-reveal="float" className="text-4xl font-display font-bold text-tomo-dark mb-10">
               {t.home.location.title}
             </h2>
