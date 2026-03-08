@@ -96,6 +96,10 @@
     },
     "location": {
       "title": "Visítanos",
+      "addressLabel": "Dirección",
+      "hoursLabel": "Horario",
+      "contactLabel": "Contacto",
+      "mapCta": "Ver en Google Maps",
       "address": "Plaça de la Navegació, 17\nSanta Catalina, Palma",
       "hours": "Martes: Cerrado\nMiércoles: 13:00 - 23:00\nJueves: 13:00 - 23:00\nViernes: 13:00 - 23:00\nSábado: 13:00 - 23:00\nDomingo: 13:00 - 23:00\nLunes: Cerrado"
     }

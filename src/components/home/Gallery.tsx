@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
+import { useTouchSwipe } from '../../hooks/useTouchSwipe';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import imgInteriorMoss from '../../../assets/photos/tomo-interior-moss.png';
@@ -25,14 +26,37 @@ const IMAGES = [
 export const Gallery = () => {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
-  // Accessibility contract: modal supports Escape-close and focus restoration.
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % IMAGES.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + IMAGES.length) % IMAGES.length);
+  }, []);
+
+  /* Lightbox navigation */
+  const lightboxNext = useCallback(() => {
+    setSelectedIndex((prev) => (prev !== null ? (prev + 1) % IMAGES.length : null));
+  }, []);
+
+  const lightboxPrev = useCallback(() => {
+    setSelectedIndex((prev) => (prev !== null ? (prev - 1 + IMAGES.length) % IMAGES.length : null));
+  }, []);
+
+  /* Touch swipe for carousel */
+  const carouselSwipe = useTouchSwipe({ onSwipeLeft: nextSlide, onSwipeRight: prevSlide });
+
+  /* Touch swipe for lightbox */
+  const lightboxSwipe = useTouchSwipe({ onSwipeLeft: lightboxNext, onSwipeRight: lightboxPrev });
+
+  /* Accessibility: modal keyboard navigation (Escape, Tab trap, arrow keys for prev/next) */
   useEffect(() => {
-    if (!selectedImage) return;
+    if (selectedIndex === null) return;
 
     previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     closeButtonRef.current?.focus();
@@ -41,33 +65,25 @@ export const Gallery = () => {
       if (!modalRef.current) return [];
       const selector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
       return Array.from(modalRef.current.querySelectorAll<HTMLElement>(selector)).filter(
-        (element) => !element.hasAttribute('disabled') && element.getAttribute('aria-hidden') !== 'true'
+        (el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true'
       );
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setSelectedImage(null);
-        return;
-      }
+      if (event.key === 'Escape') { setSelectedIndex(null); return; }
+      if (event.key === 'ArrowRight') { lightboxNext(); return; }
+      if (event.key === 'ArrowLeft') { lightboxPrev(); return; }
 
       if (event.key === 'Tab') {
-        const focusableElements = getFocusableElements();
-        if (focusableElements.length === 0) {
-          event.preventDefault();
-          return;
-        }
+        const focusable = getFocusableElements();
+        if (focusable.length === 0) { event.preventDefault(); return; }
 
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-        const activeElement = document.activeElement;
-
-        if (event.shiftKey && activeElement === firstElement) {
-          event.preventDefault();
-          lastElement.focus();
-        } else if (!event.shiftKey && activeElement === lastElement) {
-          event.preventDefault();
-          firstElement.focus();
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault(); last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault(); first.focus();
         }
       }
     };
@@ -77,18 +93,8 @@ export const Gallery = () => {
       window.removeEventListener('keydown', handleKeyDown);
       previousFocusRef.current?.focus();
     };
-  }, [selectedImage]);
+  }, [selectedIndex, lightboxNext, lightboxPrev]);
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % IMAGES.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + IMAGES.length) % IMAGES.length);
-  };
-
-  // Get visible images based on screen size (handled via CSS/Logic)
-  // Logic: We always track one index, but render 2 items starting from that index on desktop
   const getVisibleImages = () => {
     const secondIndex = (currentIndex + 1) % IMAGES.length;
     return [IMAGES[currentIndex], IMAGES[secondIndex]];
@@ -103,40 +109,45 @@ export const Gallery = () => {
           </h2>
         </div>
 
-        <div className="relative group">
+        <div className="relative group" {...carouselSwipe}>
           {/* Carousel Container */}
           <div className="flex gap-4 md:gap-8 overflow-hidden">
-            {/* Mobile: Show 1 image (just current) */}
+            {/* Mobile: 1 image */}
             <button
               type="button"
               aria-label={`Open gallery image ${currentIndex + 1}`}
               className="md:hidden w-full aspect-[4/3] relative rounded-2xl overflow-hidden cursor-pointer bg-transparent border-0 p-0"
-              onClick={() => setSelectedImage(IMAGES[currentIndex])}
+              onClick={() => setSelectedIndex(currentIndex)}
             >
               <img 
                 src={IMAGES[currentIndex]} 
                 alt="Gallery" 
+                loading="lazy"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </button>
 
-            {/* Desktop: Show 2 images */}
+            {/* Desktop: 2 images */}
             <div className="hidden md:flex w-full gap-8">
-              {getVisibleImages().map((img, idx) => (
-                <button
-                  type="button"
-                  key={`${currentIndex}-${idx}`} 
-                  aria-label={`Open gallery image ${(currentIndex + idx) % IMAGES.length + 1}`}
-                  className="w-1/2 aspect-[16/9] relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow bg-transparent border-0 p-0"
-                  onClick={() => setSelectedImage(img)}
-                >
-                  <img 
-                    src={img} 
-                    alt={`Gallery ${idx}`} 
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  />
-                </button>
-              ))}
+              {getVisibleImages().map((img, idx) => {
+                const imgIndex = (currentIndex + idx) % IMAGES.length;
+                return (
+                  <button
+                    type="button"
+                    key={`${currentIndex}-${idx}`} 
+                    aria-label={`Open gallery image ${imgIndex + 1}`}
+                    className="w-1/2 aspect-[16/9] relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow bg-transparent border-0 p-0"
+                    onClick={() => setSelectedIndex(imgIndex)}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`Gallery ${imgIndex + 1}`} 
+                      loading="lazy"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -172,34 +183,58 @@ export const Gallery = () => {
         </div>
       </div>
 
-      {/* Modal */}
-      {selectedImage && (
+      {/* Lightbox Modal — now with prev/next navigation + swipe + keyboard arrows */}
+      {selectedIndex !== null && (
         <div
           ref={modalRef}
           role="dialog"
           aria-modal="true"
           aria-label="Gallery image preview"
           className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
+          onClick={() => setSelectedIndex(null)}
+          {...lightboxSwipe}
         >
           <button 
             ref={closeButtonRef}
             type="button"
-            onClick={(event) => {
-              event.stopPropagation();
-              setSelectedImage(null);
-            }}
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+            onClick={(e) => { e.stopPropagation(); setSelectedIndex(null); }}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
             aria-label="Close image preview"
           >
             <X size={40} />
           </button>
+
+          {/* Prev */}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); lightboxPrev(); }}
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white bg-black/30 hover:bg-black/50 p-3 rounded-full transition-colors z-10"
+            aria-label="Previous image"
+          >
+            <ChevronLeft size={28} />
+          </button>
+
           <img 
-            src={selectedImage} 
-            alt="Full screen gallery" 
+            src={IMAGES[selectedIndex]} 
+            alt={`Gallery image ${selectedIndex + 1}`}
             className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           />
+
+          {/* Next */}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); lightboxNext(); }}
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white bg-black/30 hover:bg-black/50 p-3 rounded-full transition-colors z-10"
+            aria-label="Next image"
+          >
+            <ChevronRight size={28} />
+          </button>
+
+          {/* Counter */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-sm font-medium">
+            {selectedIndex + 1} / {IMAGES.length}
+          </div>
         </div>
       )}
     </section>

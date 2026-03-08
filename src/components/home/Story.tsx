@@ -35,6 +35,7 @@ export const Story = () => {
                   <img
                     src={founder.image}
                     alt={`${founder.name} profile`}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>

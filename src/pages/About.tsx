@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
 import { useRevealOnce } from '../hooks/useRevealOnce';
 import imgFounders from '../../assets/photos/tomo_founders.jpg';
@@ -6,16 +6,13 @@ import imgFounders from '../../assets/photos/tomo_founders.jpg';
 /* ── About page ──────────────────────────────────────────────
    Three sections: The Journey → The Founders → What's Next.
    Follows the same design tokens and reveal animations as Home.
+   Scroll-to-top is handled globally by ScrollToTop component.
    ──────────────────────────────────────────────────────────── */
 
 export const About = () => {
   const { t } = useTranslation();
   const pageRef = useRef<HTMLDivElement | null>(null);
   useRevealOnce(pageRef);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <div ref={pageRef} className="flex flex-col w-full">
@@ -50,6 +47,7 @@ export const About = () => {
                 <img
                   src={imgFounders}
                   alt="TOMO founders"
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>
