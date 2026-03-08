@@ -25,6 +25,7 @@ export const Introduction = () => {
                 <img 
                   src={imgStorefront}
                   alt="TOMO storefront in Santa Catalina" 
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-tomo-dark/10 group-hover:bg-transparent transition-colors duration-500"></div>
@@ -67,6 +68,7 @@ export const Introduction = () => {
                 <img 
                   src={imgDishCaviar}
                   alt="TOMO signature dish" 
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-tomo-dark/10 group-hover:bg-transparent transition-colors duration-500"></div>

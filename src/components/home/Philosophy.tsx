@@ -4,19 +4,24 @@ import { Leaf, Heart, Utensils } from 'lucide-react';
 export const Philosophy = () => {
   const { t } = useTranslation();
 
+  /* Each card gets a tinted icon circle matching its icon color
+     (previously white-on-white → invisible circle). */
   const cards = [
     {
       icon: <Leaf className="w-8 h-8 text-tomo-green" />,
+      iconBg: 'bg-tomo-green/10',
       title: t.home.philosophy.card1.title,
       desc: t.home.philosophy.card1.desc,
     },
     {
       icon: <Heart className="w-8 h-8 text-tomo-red" />,
+      iconBg: 'bg-tomo-red/10',
       title: t.home.philosophy.card2.title,
       desc: t.home.philosophy.card2.desc,
     },
     {
       icon: <Utensils className="w-8 h-8 text-tomo-dark" />,
+      iconBg: 'bg-tomo-dark/10',
       title: t.home.philosophy.card3.title,
       desc: t.home.philosophy.card3.desc,
     },
@@ -42,7 +47,7 @@ export const Philosophy = () => {
               data-reveal-dir={index === 1 ? 'right' : 'left'}
               className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 flex flex-col items-center text-center"
             >
-              <div className="bg-white p-4 rounded-full mb-6">
+              <div className={`${card.iconBg} p-4 rounded-full mb-6`}>
                 {card.icon}
               </div>
               <h3 className="text-2xl font-display font-bold text-tomo-dark mb-3">

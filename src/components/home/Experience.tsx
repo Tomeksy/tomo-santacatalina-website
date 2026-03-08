@@ -16,12 +16,14 @@ export const Experience = () => {
               <img 
                 src={imgCheers}
                 alt="Guests clinking wine glasses at TOMO" 
+                loading="lazy"
                 className="w-full h-64 object-cover rounded-2xl translate-y-8"
               />
             </div>
             <img 
               src={imgSign}
               alt="Hola TOMO sign" 
+              loading="lazy"
               className="w-full h-64 object-cover rounded-2xl"
             />
           </div>
