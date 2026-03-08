@@ -23,7 +23,7 @@ export const Location = () => {
                   <MapPin className="w-6 h-6 text-tomo-red" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-tomo-dark mb-1">Address</h3>
+                  <h3 className="font-bold text-tomo-dark mb-1">{t.home.location.addressLabel}</h3>
                   <p className="text-tomo-gray whitespace-pre-line">
                     {t.home.location.address}
                   </p>
@@ -35,7 +35,7 @@ export const Location = () => {
                   <Clock className="w-6 h-6 text-tomo-green" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-tomo-dark mb-1">Hours</h3>
+                  <h3 className="font-bold text-tomo-dark mb-1">{t.home.location.hoursLabel}</h3>
                   <p className="text-tomo-gray whitespace-pre-line">
                     {t.home.location.hours}
                   </p>
@@ -47,7 +47,7 @@ export const Location = () => {
                   <Phone className="w-6 h-6 text-tomo-dark" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-tomo-dark mb-1">Contact</h3>
+                  <h3 className="font-bold text-tomo-dark mb-1">{t.home.location.contactLabel}</h3>
                   <a href="tel:+34608979100" className="text-tomo-gray hover:text-tomo-red transition-colors">
                     +34 608 979 100
                   </a>
@@ -71,7 +71,7 @@ export const Location = () => {
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-transparent transition-colors">
               <span className="bg-white px-6 py-3 rounded-full shadow-lg font-bold text-tomo-dark">
-                View on Google Maps
+                {t.home.location.viewOnMaps}
               </span>
             </div>
           </a>
