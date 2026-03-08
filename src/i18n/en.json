@@ -19,7 +19,7 @@
       "col1": {
         "title": "Experience",
         "subtitle": "A Unique Atmosphere and Service",
-        "body": "Step into a space designed to feel alive. Natural wood, original artwork by Juri Art, and a warm, grounded atmosphere invite you to slow down. TOMO is a place to sit, enjoy a glass of wine, and and let the atmosphere do the rest."
+        "body": "Step into a space designed to feel alive. Natural wood, original artwork by Juri Art, and a warm, grounded atmosphere invite you to slow down. TOMO is a place to sit, enjoy a glass of wine, and let the atmosphere do the rest."
       },
       "col2": {
         "title": "Cuisine",
@@ -97,6 +97,10 @@
     "location": {
       "title": "Visit Us",
       "address": "Plaça de la Navegació, 17\nSanta Catalina, Palma",
+      "addressLabel": "Address",
+      "hoursLabel": "Hours",
+      "contactLabel": "Contact",
+      "viewOnMaps": "View on Google Maps",
       "hours": "Tuesday: Closed\nWednesday: 1-11pm\nThursday: 1-11pm\nFriday: 1-11pm\nSaturday: 1-11pm\nSunday: 1-11pm\nMonday: Closed"
     }
   },
