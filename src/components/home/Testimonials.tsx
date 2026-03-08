@@ -62,7 +62,9 @@ export const Testimonials = () => {
   };
 
   // Logic: Always track one index, render 2 items starting from that index on desktop.
+  // Guard: empty array would crash ReviewCard (accessing `undefined.author`).
   const getVisibleReviews = () => {
+    if (reviews.length === 0) return [];
     if (reviews.length <= 1) return [reviews[currentIndex]];
     const secondIndex = (currentIndex + 1) % reviews.length;
     return [reviews[currentIndex], reviews[secondIndex]];
@@ -147,7 +149,7 @@ export const Testimonials = () => {
             <div className="flex gap-8">
               {/* Mobile: Show 1 review */}
               <div className="md:hidden w-full flex-shrink-0">
-                <ReviewCard review={reviews[currentIndex]} />
+                {reviews[currentIndex] && <ReviewCard review={reviews[currentIndex]} />}
               </div>
 
               {/* Desktop: Show 2 reviews */}
