@@ -32,33 +32,7 @@
     },
     "testimonials": {
       "title": "¿Cómo sabe?",
-      "subtitle": "No te fíes solo de nosotros - Escucha a nuestros clientes",
-      "reviews": [
-        {
-          "id": 1,
-          "author": "Kevin Kronschläger",
-          "badge": "Guía local",
-          "reviewsLabel": "7 reseñas",
-          "photosLabel": "13 fotos",
-          "timeAgoLabel": "2026-03-02",
-          "visitLabel": "Comer en el restaurante",
-          "priceLabel": "10–20 €",
-          "text": "Comida mega deliciosa 🤩😍\n¡Un gran cumplido para todo el equipo de TOMO 🚀!",
-          "ratingsLabel": "Comida: 5/5 | Servicio: 5/5 | Ambiente: 5/5"
-        },
-        {
-          "id": 2,
-          "author": "Sakahane",
-          "badge": "",
-          "reviewsLabel": "2 reseñas",
-          "photosLabel": "1 foto",
-          "timeAgoLabel": "2026-02-26",
-          "visitLabel": "Cena",
-          "priceLabel": "",
-          "text": "Lo descubrí de forma espontánea y me encantó la comida desde el primer momento.\nEl personal y el cocinero fueron súper amables.\nLa comida estaba muy rica y era muy variada.\nConsejo: ¡probad sí o sí la tarta de queso de tomate y albahaca!! :)",
-          "ratingsLabel": ""
-        }
-      ]
+      "subtitle": "No te fíes solo de nosotros - Escucha a nuestros clientes"
     },
     "philosophy": {
       "title": "La Trinidad del Sabor",

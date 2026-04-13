@@ -1,25 +1,21 @@
 import { useState } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { reviews } from '../../data/reviews';
+
+// Max characters shown before the "Read more" toggle kicks in.
+const TEXT_LIMIT = 180;
 
 export const Testimonials = () => {
   const { t, language } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  /* Testimonials data contract:
-     - Source of truth: `home.testimonials.reviews` in i18n JSON files.
-     - To add a new review, copy one review object, increment `id`, and keep the same `id`
-       in `en.json`, `es.json`, and `de.json`.
-     - Display order is driven by `id`, so new entries appear automatically.
-     - `timeAgoLabel` now stores the review date as `YYYY-MM-DD`. The UI computes
-       localized relative time automatically (for example: "1 day ago", "hace 1 día").
-  */
-  const reviews = [...t.home.testimonials.reviews].sort((a, b) => a.id - b.id);
+  // Reviews are sorted by id (lowest = newest).
+  const sorted = [...reviews].sort((a, b) => a.id - b.id);
   const DAY_MS = 24 * 60 * 60 * 1000;
 
-  /* Parse date string + calculate "x days ago" in active language.
-     Fallback contract: if date format is invalid, display raw value unchanged.
-  */
+  /* Parse YYYY-MM-DD date string and return a localized relative label.
+     Fallback: if format is invalid, return the raw value unchanged. */
   const getRelativeDateLabel = (dateValue: string) => {
     const trimmed = dateValue.trim();
     const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(trimmed);
@@ -54,72 +50,88 @@ export const Testimonials = () => {
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % reviews.length);
+    setCurrentIndex((prev) => (prev + 1) % sorted.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+    setCurrentIndex((prev) => (prev - 1 + sorted.length) % sorted.length);
   };
 
-  // Logic: Always track one index, render 2 items starting from that index on desktop.
+  // Desktop shows 2 reviews starting from currentIndex (wraps around).
   const getVisibleReviews = () => {
-    if (reviews.length <= 1) return [reviews[currentIndex]];
-    const secondIndex = (currentIndex + 1) % reviews.length;
-    return [reviews[currentIndex], reviews[secondIndex]];
+    if (sorted.length <= 1) return [sorted[currentIndex]];
+    const secondIndex = (currentIndex + 1) % sorted.length;
+    return [sorted[currentIndex], sorted[secondIndex]];
   };
 
-  // Helper to generate a consistent color for the avatar based on name.
+  // Consistent avatar color derived from author name length.
   const getAvatarColor = (name: string) => {
     const colors = [
       'bg-purple-600', 'bg-blue-600', 'bg-green-600',
       'bg-yellow-600', 'bg-red-600', 'bg-indigo-600',
-      'bg-pink-600', 'bg-orange-600'
+      'bg-pink-600', 'bg-orange-600',
     ];
-    const index = name.length % colors.length;
-    return colors[index];
+    return colors[name.length % colors.length];
   };
 
-  const ReviewCard = ({ review }: { review: (typeof reviews)[number] }) => {
+  const ReviewCard = ({ review }: { review: (typeof sorted)[number] }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
     const reviewerMeta = [review.badge, review.reviewsLabel, review.photosLabel].filter(Boolean).join(' • ');
     const visitMeta = [review.visitLabel, review.priceLabel].filter(Boolean).join(' | ');
+    const needsTruncation = review.text.length > TEXT_LIMIT;
+    const displayText = needsTruncation && !isExpanded
+      ? review.text.slice(0, TEXT_LIMIT).trimEnd() + '…'
+      : review.text;
 
     return (
-      <div className="bg-white p-8 rounded-xl shadow-md h-full flex flex-col border border-gray-100">
+      <div className="bg-white p-8 rounded-xl shadow-md flex flex-col border border-gray-100">
         {/* Header: avatar, profile meta, Google mark. */}
         <div className="flex items-center gap-4 mb-4">
-          <div className={`w-10 h-10 rounded-full ${getAvatarColor(review.author)} flex items-center justify-center text-white font-bold text-sm`}>
+          <div className={`w-10 h-10 rounded-full ${getAvatarColor(review.author)} flex-shrink-0 flex items-center justify-center text-white font-bold text-sm`}>
             {review.author.charAt(0)}
           </div>
-          <div>
-            <h4 className="font-bold text-gray-900 text-sm">{review.author}</h4>
+          <div className="min-w-0">
+            <h4 className="font-bold text-gray-900 text-sm truncate">{review.author}</h4>
             <span className="text-xs text-gray-500">{reviewerMeta}</span>
           </div>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
             alt="Google"
-            className="w-5 h-5 ml-auto opacity-50"
+            className="w-5 h-5 ml-auto flex-shrink-0 opacity-50"
           />
         </div>
 
-        {/* Rating + recency line. */}
-        <div className="flex gap-1 mb-3">
+        {/* Rating + recency. */}
+        <div className="flex items-center gap-1 mb-3">
           {[...Array(5)].map((_, i) => (
             <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
           ))}
-          <span className="text-xs text-gray-500 ml-2 mt-0.5">{getRelativeDateLabel(review.timeAgoLabel)}</span>
+          <span className="text-xs text-gray-500 ml-2">{getRelativeDateLabel(review.timeAgoLabel)}</span>
         </div>
 
-        {/* Optional visit/price context for authenticity. */}
+        {/* Optional visit/price context. */}
         {visitMeta ? (
           <p className="text-xs text-gray-500 mb-3">{visitMeta}</p>
         ) : null}
 
-        {/* Main review text keeps line breaks from i18n content. */}
-        <p className="text-gray-700 leading-relaxed text-sm whitespace-pre-line flex-grow">
-          {review.text}
-        </p>
+        {/* Review text with truncation toggle. */}
+        <div className="flex-grow">
+          <p className="text-gray-700 leading-relaxed text-sm whitespace-pre-line">
+            {displayText}
+          </p>
+          {needsTruncation ? (
+            <button
+              type="button"
+              onClick={() => setIsExpanded((v) => !v)}
+              className="mt-1 text-xs font-medium text-tomo-red hover:underline focus:outline-none"
+            >
+              {isExpanded ? 'Show less' : 'Read more'}
+            </button>
+          ) : null}
+        </div>
 
-        {/* Optional ratings summary pill (first review uses this). */}
+        {/* Optional ratings summary pill. */}
         {review.ratingsLabel ? (
           <div className="mt-4 rounded-2xl bg-gray-100 px-4 py-3 text-sm font-semibold text-gray-700">
             {review.ratingsLabel}
@@ -142,15 +154,15 @@ export const Testimonials = () => {
         </div>
 
         <div className="relative max-w-5xl mx-auto">
-          {/* Carousel Container */}
+          {/* Carousel container */}
           <div className="overflow-hidden py-4">
             <div className="flex gap-8">
-              {/* Mobile: Show 1 review */}
+              {/* Mobile: 1 review */}
               <div className="md:hidden w-full flex-shrink-0">
-                <ReviewCard review={reviews[currentIndex]} />
+                <ReviewCard review={sorted[currentIndex]} />
               </div>
 
-              {/* Desktop: Show 2 reviews */}
+              {/* Desktop: 2 reviews */}
               <div className="hidden md:flex w-full gap-8">
                 {getVisibleReviews().map((review, idx) => (
                   <div key={review.id ?? `${currentIndex}-${idx}`} className="w-1/2 flex-shrink-0">
@@ -161,19 +173,18 @@ export const Testimonials = () => {
             </div>
           </div>
 
-          {/* Bugfix contract:
-              Keep desktop arrows outside the cards and render separate mobile controls below cards
-              so no button can overlap testimonial copy at narrow widths. */}
-          {reviews.length > 1 ? (
+          {/* Desktop prev/next arrows — positioned outside the cards.
+              Bugfix: kept outside the card area so they never overlap text. */}
+          {sorted.length > 1 ? (
             <>
-              <button 
+              <button
                 onClick={prevSlide}
                 className="hidden md:inline-flex absolute md:-left-16 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-700 p-3 rounded-full shadow-lg transition-all border border-gray-100"
                 aria-label="Previous review"
               >
                 <ChevronLeft size={24} />
               </button>
-              <button 
+              <button
                 onClick={nextSlide}
                 className="hidden md:inline-flex absolute md:-right-16 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-700 p-3 rounded-full shadow-lg transition-all border border-gray-100"
                 aria-label="Next review"
@@ -184,7 +195,8 @@ export const Testimonials = () => {
           ) : null}
         </div>
 
-        {reviews.length > 1 ? (
+        {/* Mobile prev/next arrows */}
+        {sorted.length > 1 ? (
           <div className="mt-6 flex items-center justify-center gap-4 md:hidden">
             <button
               type="button"
@@ -205,19 +217,14 @@ export const Testimonials = () => {
           </div>
         ) : null}
 
-        {/* Indicators */}
-        <div className="flex justify-center mt-12 gap-2">
-          {reviews.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentIndex(idx)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                idx === currentIndex ? 'bg-tomo-red w-6' : 'bg-gray-300 hover:bg-gray-400'
-              }`}
-              aria-label={`Go to review ${idx + 1}`}
-            />
-          ))}
-        </div>
+        {/* Position counter — replaces dot indicators, scales to any review count. */}
+        {sorted.length > 1 ? (
+          <div className="flex justify-center mt-8">
+            <span className="text-sm text-gray-400 font-medium tabular-nums">
+              {currentIndex + 1} / {sorted.length}
+            </span>
+          </div>
+        ) : null}
       </div>
     </section>
   );

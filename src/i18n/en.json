@@ -32,33 +32,7 @@
     },
     "testimonials": {
       "title": "How does it Taste?",
-      "subtitle": "Don't take it from us - Hear what our customers say",
-      "reviews": [
-        {
-          "id": 1,
-          "author": "Kevin Kronschläger",
-          "badge": "Local Guide",
-          "reviewsLabel": "7 reviews",
-          "photosLabel": "13 photos",
-          "timeAgoLabel": "2026-03-02",
-          "visitLabel": "Dine-in",
-          "priceLabel": "€10–20",
-          "text": "Mega delicious food 🤩😍\nBig compliment to the whole TOMO team 🚀",
-          "ratingsLabel": "Food: 5/5 | Service: 5/5 | Ambience: 5/5"
-        },
-        {
-          "id": 2,
-          "author": "Sakahane",
-          "badge": "",
-          "reviewsLabel": "2 reviews",
-          "photosLabel": "1 photo",
-          "timeAgoLabel": "2026-02-26",
-          "visitLabel": "Dinner",
-          "priceLabel": "",
-          "text": "Discovered it spontaneously and was immediately impressed by the food.\nThe staff and the chef were super friendly.\nThe food was very tasty and diverse.\nTip: definitely try the tomato-basil cheesecake!! :)",
-          "ratingsLabel": ""
-        }
-      ]
+      "subtitle": "Don't take it from us - Hear what our customers say"
     },
     "philosophy": {
       "title": "The Trinity of Taste",

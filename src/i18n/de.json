@@ -32,33 +32,7 @@
     },
     "testimonials": {
       "title": "Wie schmeckt es?",
-      "subtitle": "Hören Sie nicht nur auf uns - Das sagen unsere Gäste",
-      "reviews": [
-        {
-          "id": 1,
-          "author": "Kevin Kronschläger",
-          "badge": "Local Guide",
-          "reviewsLabel": "7 Rezensionen",
-          "photosLabel": "13 Fotos",
-          "timeAgoLabel": "2026-03-02",
-          "visitLabel": "Verzehr im Restaurant",
-          "priceLabel": "10–20 €",
-          "text": "Mega leckeres Essen 🤩😍\nGroßes Kompliment an das gesamte TOMO Team 🚀",
-          "ratingsLabel": "Essen: 5/5 | Service: 5/5 | Ambiente: 5/5"
-        },
-        {
-          "id": 2,
-          "author": "Sakahane",
-          "badge": "",
-          "reviewsLabel": "2 Rezensionen",
-          "photosLabel": "1 Foto",
-          "timeAgoLabel": "2026-02-26",
-          "visitLabel": "Abendessen",
-          "priceLabel": "",
-          "text": "spontan entdeckt und gleich vom Essen begeistert.\nPersonal und der Koch waren super nett\nEssen war sehr lecker und vielfältig.\nTipp: probiert unbedingt das Tomaten-Basilikum Cheesecake!! :)",
-          "ratingsLabel": ""
-        }
-      ]
+      "subtitle": "Hören Sie nicht nur auf uns - Das sagen unsere Gäste"
     },
     "philosophy": {
       "title": "Die Dreifaltigkeit des Geschmacks",
