@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from '../../hooks/useTranslation';
 import { Menu, X } from 'lucide-react';
@@ -7,6 +7,26 @@ import tomoLogo from '../../../assets/logo_and_brand/tomologofull_header_size.pn
 export const Header = () => {
   const { t, language, setLanguage } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const toggleRef = useRef<HTMLButtonElement | null>(null);
+
+  /* Close mobile menu on outside click */
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (
+        menuRef.current && !menuRef.current.contains(target) &&
+        toggleRef.current && !toggleRef.current.contains(target)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [isMenuOpen]);
 
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm/50">
@@ -70,9 +90,11 @@ export const Header = () => {
           {/* Mobile/tablet menu button — visible below lg */}
           <div className="lg:hidden flex items-center">
             <button
+              ref={toggleRef}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-tomo-dark hover:text-tomo-red p-2 transition-colors"
               aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -80,52 +102,55 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* Mobile/Tablet Menu */}
-      {isMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
-          <div className="px-4 pt-2 pb-6 space-y-4">
-            <NavLink
-              to="/" 
-              end
-              className={({ isActive }) => `block px-3 py-2 text-lg font-medium ${isActive ? 'text-tomo-red' : 'text-tomo-dark hover:text-tomo-red'}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t.nav.home}
-            </NavLink>
-            <div className="px-3 py-2 text-lg font-medium text-tomo-gray/40">
-              {t.nav.menu}
-            </div>
-            <NavLink
-              to="/about"
-              className={({ isActive }) => `block px-3 py-2 text-lg font-medium ${isActive ? 'text-tomo-red' : 'text-tomo-dark hover:text-tomo-red'}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t.nav.about}
-            </NavLink>
-            
-            <div className="flex space-x-6 px-3 py-4 border-t border-gray-100 mt-2">
-              {(['en', 'es', 'de'] as const).map((lang) => (
-                <button 
-                  key={lang}
-                  onClick={() => setLanguage(lang)} 
-                  className={`text-base font-medium uppercase ${
-                    language === lang ? 'text-tomo-red' : 'text-tomo-gray'
-                  }`}
-                >
-                  {lang}
-                </button>
-              ))}
-            </div>
-
-            <a 
-              href="tel:+34608979100" 
-              className="block w-full text-center bg-tomo-red text-white px-6 py-3 rounded-full font-medium hover:bg-red-700 transition-colors"
-            >
-              {t.cta.reserve}
-            </a>
+      {/* Mobile/Tablet Menu — animated slide-down */}
+      <div
+        ref={menuRef}
+        className={`lg:hidden absolute w-full bg-white border-t border-gray-100 shadow-lg overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+          isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="px-4 pt-2 pb-6 space-y-4">
+          <NavLink
+            to="/" 
+            end
+            className={({ isActive }) => `block px-3 py-2 text-lg font-medium ${isActive ? 'text-tomo-red' : 'text-tomo-dark hover:text-tomo-red'}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t.nav.home}
+          </NavLink>
+          <div className="px-3 py-2 text-lg font-medium text-tomo-gray/40">
+            {t.nav.menu}
           </div>
+          <NavLink
+            to="/about"
+            className={({ isActive }) => `block px-3 py-2 text-lg font-medium ${isActive ? 'text-tomo-red' : 'text-tomo-dark hover:text-tomo-red'}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t.nav.about}
+          </NavLink>
+          
+          <div className="flex space-x-6 px-3 py-4 border-t border-gray-100 mt-2">
+            {(['en', 'es', 'de'] as const).map((lang) => (
+              <button 
+                key={lang}
+                onClick={() => setLanguage(lang)} 
+                className={`text-base font-medium uppercase ${
+                  language === lang ? 'text-tomo-red' : 'text-tomo-gray'
+                }`}
+              >
+                {lang}
+              </button>
+            ))}
+          </div>
+
+          <a 
+            href="tel:+34608979100" 
+            className="block w-full text-center bg-tomo-red text-white px-6 py-3 rounded-full font-medium hover:bg-red-700 transition-colors"
+          >
+            {t.cta.reserve}
+          </a>
         </div>
-      )}
+      </div>
     </header>
   );
 };

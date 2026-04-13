@@ -12,6 +12,12 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-bold;
   }
+
+  /* Accessible keyboard focus ring — visible only for keyboard users (:focus-visible).
+     Uses brand red with an offset ring so it works on both light and dark backgrounds. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-tomo-red/70 ring-offset-2;
+  }
 }
 
 @layer utilities {

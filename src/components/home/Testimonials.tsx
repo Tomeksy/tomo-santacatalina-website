@@ -1,10 +1,21 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
+import { useTouchSwipe } from '../../hooks/useTouchSwipe';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { reviews } from '../../data/reviews';
 
 // Max characters shown before the "Read more" toggle kicks in.
 const TEXT_LIMIT = 180;
+
+/* Inline Google "G" SVG — avoids external dependency on Wikipedia CDN. */
+const GoogleLogo = () => (
+  <svg className="w-5 h-5 ml-auto opacity-50" viewBox="0 0 24 24" aria-label="Google">
+    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A11.96 11.96 0 0 0 1 12c0 1.94.46 3.77 1.18 5.07l3.66-2.98z" fill="#FBBC05"/>
+    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+  </svg>
+);
 
 export const Testimonials = () => {
   const { t, language } = useTranslation();
@@ -49,13 +60,15 @@ export const Testimonials = () => {
     return formatter.format(-diffDays, 'day');
   };
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % sorted.length);
-  };
+  }, [sorted.length]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + sorted.length) % sorted.length);
-  };
+  }, [sorted.length]);
+
+  const swipeHandlers = useTouchSwipe({ onSwipeLeft: nextSlide, onSwipeRight: prevSlide });
 
   // Desktop shows 2 reviews starting from currentIndex (wraps around).
   const getVisibleReviews = () => {
@@ -95,11 +108,7 @@ export const Testimonials = () => {
             <h4 className="font-bold text-gray-900 text-sm truncate">{review.author}</h4>
             <span className="text-xs text-gray-500">{reviewerMeta}</span>
           </div>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
-            alt="Google"
-            className="w-5 h-5 ml-auto flex-shrink-0 opacity-50"
-          />
+          <GoogleLogo />
         </div>
 
         {/* Rating + recency. */}
@@ -154,8 +163,7 @@ export const Testimonials = () => {
         </div>
 
         <div className="relative max-w-5xl mx-auto">
-          {/* Carousel container */}
-          <div className="overflow-hidden py-4">
+          <div className="overflow-hidden py-4" {...swipeHandlers}>
             <div className="flex gap-8">
               {/* Mobile: 1 review */}
               <div className="md:hidden w-full flex-shrink-0">
