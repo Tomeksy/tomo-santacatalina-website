@@ -1,4 +1,5 @@
 import { useTranslation } from '../../hooks/useTranslation';
+import { SectionHeader } from '../ui/SectionHeader';
 import imgCheers from '../../../assets/photos/tomo-cheers.png';
 import imgSign from '../../../assets/photos/tomo-sign-closeup.png';
 import { Check } from 'lucide-react';
@@ -7,50 +8,47 @@ export const Experience = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
-          {/* Image Grid */}
-          <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4">
-            <div data-reveal="float">
-              <img 
+    <section className="relative py-24 md:py-32 bg-tomo-cream overflow-hidden">
+      {/* Ambient warm glow — keeps the cream surface from reading flat */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(900px 500px at 90% 0%, rgba(47,74,60,0.05), rgba(47,74,60,0) 60%), radial-gradient(800px 600px at 5% 100%, rgba(218,36,14,0.05), rgba(218,36,14,0) 60%)',
+        }}
+      />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          eyebrow={t.home.experience.eyebrow}
+          title={t.home.experience.title}
+          className="mb-16"
+        />
+
+        <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-20">
+          {/* Image pair — staggered to feel editorial */}
+          <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4 md:gap-5">
+            <div data-reveal="fade" className="aspect-[3/4] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 translate-y-6">
+              <img
                 src={imgCheers}
-                alt="Guests clinking wine glasses at TOMO" 
+                alt="Guests clinking wine glasses at TOMO"
                 loading="lazy"
-                className="w-full h-64 object-cover rounded-2xl translate-y-8"
+                className="w-full h-full object-cover"
               />
             </div>
-            <img 
-              src={imgSign}
-              alt="Hola TOMO sign" 
-              loading="lazy"
-              className="w-full h-64 object-cover rounded-2xl"
-            />
+            <div data-reveal="fade" className="aspect-[3/4] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5">
+              <img
+                src={imgSign}
+                alt="Hola TOMO sign"
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
 
           {/* Content */}
           <div className="w-full lg:w-1/2">
-            <h2 data-reveal="underline" className="text-4xl md:text-5xl font-display font-bold text-tomo-dark mb-6">
-              <span className="relative inline-block">
-                {t.home.experience.title}
-                <svg
-                  aria-hidden="true"
-                  className="reveal-underline absolute left-0 -bottom-2 w-full h-3 text-tomo-green/80"
-                  viewBox="0 0 100 10"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M2 8 C 25 2, 75 2, 98 8"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    pathLength="1"
-                  />
-                </svg>
-              </span>
-            </h2>
-            <p className="text-lg text-tomo-gray mb-8 leading-relaxed">
+            <p data-reveal="fade" className="text-lg text-tomo-gray mb-8 leading-relaxed">
               {t.home.experience.desc}
             </p>
 
@@ -58,10 +56,15 @@ export const Experience = () => {
               {[
                 t.home.experience.feature1,
                 t.home.experience.feature2,
-                t.home.experience.feature3
+                t.home.experience.feature3,
               ].map((feature, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <div className="bg-tomo-green/10 p-1 rounded-full">
+                <li
+                  key={i}
+                  data-reveal="fade"
+                  style={{ animationDelay: `${i * 120}ms` }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="bg-tomo-green/10 p-1.5 rounded-full">
                     <Check className="w-5 h-5 text-tomo-green" />
                   </div>
                   <span className="text-tomo-dark font-medium text-lg">{feature}</span>

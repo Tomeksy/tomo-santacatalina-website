@@ -4,80 +4,70 @@ export const Concept = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-24 bg-gray-50 text-tomo-dark relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 data-reveal="float" className="text-4xl md:text-5xl font-display font-bold text-tomo-dark mb-4">
-            {t.home.concept.title}
-          </h2>
-          <p className="text-xl text-tomo-gray max-w-2xl mx-auto">
-            {t.home.concept.subtitle}
+    <section className="relative overflow-hidden bg-tomo-moss text-tomo-cream py-28 md:py-36">
+      {/* Ambient lighting — warm spot + cool wash to avoid a flat panel */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(900px 520px at 20% 0%, rgba(255,248,240,0.10), rgba(255,248,240,0) 65%), radial-gradient(700px 600px at 85% 100%, rgba(218,36,14,0.14), rgba(218,36,14,0) 60%)',
+        }}
+      />
+      {/* Fine noise for texture — keeps moss panel from looking plastic */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(120deg, rgba(255,255,255,0.5) 0 1px, rgba(255,255,255,0) 1px 3px), repeating-linear-gradient(60deg, rgba(0,0,0,0.4) 0 1px, rgba(0,0,0,0) 1px 4px)',
+        }}
+      />
+
+      <div className="relative max-w-4xl mx-auto px-6 sm:px-8 text-center">
+        {/* Eyebrow with accent rule */}
+        <div data-reveal="fade" className="flex items-center justify-center gap-4 mb-10">
+          <span aria-hidden="true" className="h-px w-10 bg-tomo-cream/40" />
+          <span className="text-tomo-cream/80 font-sans font-semibold tracking-[0.3em] uppercase text-xs">
+            {t.home.concept.header}
+          </span>
+          <span aria-hidden="true" className="h-px w-10 bg-tomo-cream/40" />
+        </div>
+
+        <h2
+          data-reveal="float"
+          className="text-4xl md:text-6xl font-display font-semibold text-tomo-cream leading-[1.05] mb-6"
+        >
+          {t.home.concept.title}
+        </h2>
+
+        <p
+          data-reveal="fade"
+          className="italic text-lg md:text-xl font-display text-tomo-cream/70 mb-14"
+        >
+          {t.home.concept.subtitle}
+        </p>
+
+        {/* Editorial pull quote — large serif, soft contrast, decorative quotation mark */}
+        <div data-reveal="float" className="relative">
+          <span
+            aria-hidden="true"
+            className="absolute -top-16 md:-top-20 left-1/2 -translate-x-1/2 font-display text-[10rem] md:text-[14rem] leading-none text-tomo-cream/10 select-none"
+          >
+            &ldquo;
+          </span>
+          <p className="relative text-lg md:text-2xl leading-relaxed md:leading-[1.7] font-light text-tomo-cream/90 whitespace-pre-line max-w-3xl mx-auto">
+            {t.home.concept.body}
           </p>
         </div>
 
-        <div className="flex flex-col items-center">
-          {/* Clipboard wrapper (dark wood) */}
-          <div className="relative w-full max-w-3xl clipboard-wood rounded-3xl p-6 sm:p-8 shadow-[0_30px_90px_rgba(17,24,39,0.25)]">
-            {/* Metal clip (decorative) */}
-            <svg
-              aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-3 -translate-x-1/2 w-24 h-10 drop-shadow-md clipboard-clip-settle"
-              viewBox="0 0 120 50"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <defs>
-                <linearGradient id="clipMetal" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stopColor="#F3F4F6" />
-                  <stop offset="0.35" stopColor="#D1D5DB" />
-                  <stop offset="0.7" stopColor="#9CA3AF" />
-                  <stop offset="1" stopColor="#E5E7EB" />
-                </linearGradient>
-                <linearGradient id="clipHighlight" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stopColor="rgba(255,255,255,0)" />
-                  <stop offset="0.5" stopColor="rgba(255,255,255,0.65)" />
-                  <stop offset="1" stopColor="rgba(255,255,255,0)" />
-                </linearGradient>
-              </defs>
-
-              {/* Base */}
-              <rect x="10" y="10" width="100" height="30" rx="10" fill="url(#clipMetal)" />
-              {/* Inner groove */}
-              <rect x="22" y="18" width="76" height="14" rx="7" fill="rgba(17,24,39,0.18)" />
-              {/* Highlight sweep */}
-              <rect x="18" y="12" width="84" height="6" rx="3" fill="url(#clipHighlight)" opacity="0.75" />
-            </svg>
-
-            {/* Paper/menu card */}
-            <div
-              data-reveal="float"
-              className="relative w-full max-w-2xl mx-auto mt-10 bg-gradient-to-b from-white to-gray-50/30 text-tomo-dark p-8 md:p-12 rounded-2xl ring-1 ring-black/5 shadow-[0_25px_70px_rgba(17,24,39,0.14),0_10px_25px_rgba(17,24,39,0.08)] transform transition-all duration-1000 overflow-hidden"
-            >
-              {/* Paper texture + subtle light sweep */}
-              <div className="pointer-events-none absolute inset-0 menu-card-grain opacity-[0.06]" />
-              <div className="pointer-events-none absolute inset-0 menu-card-sheen opacity-[0.10]" />
-              
-              <div className="text-center">
-                <span className="text-tomo-red font-display font-bold tracking-widest uppercase text-sm mb-4 block">
-                  {t.home.concept.header}
-                </span>
-                {/* Preserve intentional paragraph breaks from translation copy. */}
-                <p className="text-lg md:text-xl leading-relaxed font-light text-tomo-gray whitespace-pre-line">
-                  "{t.home.concept.body}"
-                </p>
-                
-                {/* Signature/Footer of card */}
-                <div className="mt-8 pt-8 border-t border-gray-100 flex justify-center">
-                  <div className="font-display font-bold text-tomo-dark text-xl">TOMO</div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Signature */}
+        <div data-reveal="fade" className="mt-16 flex items-center justify-center gap-6">
+          <span aria-hidden="true" className="h-px w-16 bg-tomo-cream/30" />
+          <span className="font-display font-bold text-tomo-cream tracking-[0.35em] text-sm">TOMO</span>
+          <span aria-hidden="true" className="h-px w-16 bg-tomo-cream/30" />
         </div>
       </div>
-      
-      {/* Background Elements */}
-      <div className="absolute top-1/2 left-0 w-64 h-64 bg-gray-200/60 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gray-300/40 rounded-full blur-3xl translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
     </section>
   );
 };

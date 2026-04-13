@@ -28,13 +28,16 @@
       }
     },
     "gallery": {
-      "title": "Galerie"
+      "title": "Galerie",
+      "subtitle": "Ein Geschmack von TOMO"
     },
     "testimonials": {
+      "eyebrow": "Bewertungen",
       "title": "Wie schmeckt es?",
       "subtitle": "Hören Sie nicht nur auf uns - Das sagen unsere Gäste"
     },
     "philosophy": {
+      "eyebrow": "Philosophie",
       "title": "Die Dreifaltigkeit des Geschmacks",
       "subtitle": "Einfache Zutaten, perfektioniert.",
       "card1": {
@@ -51,6 +54,7 @@
       }
     },
     "experience": {
+      "eyebrow": "Atmosphäre",
       "title": "Ein Ort mit Charakter",
       "desc": "Isländisches und Bollenmoos von MoosMoos — Kunst von Juri, die Sie sonst nirgends finden, und Essen, das wie eine sündige Versuchung schmeckt, aber keine ist.",
       "feature1": "Lebendes Moos von MoosMoos",
@@ -64,11 +68,13 @@
       "body": "Wir haben TOMO mit einer einfachen Frage gestartet: Warum muss gesundes Essen langweilig sein? Wir glauben, gut zu essen sollte sich nicht wie Verzicht anfühlen. Deshalb haben wir TOMO auf einer Idee aufgebaut: 100 % natürliche Zutaten, null Kompromisse beim Geschmack.\n\nUnsere Antwort steht auf der Karte – frische, proteinreiche Gerichte, die sich wie ein Genuss mit schlechtem Gewissen anfühlen, es aber nicht sind. Tomate, Mozzarella und Pesto als Grundlage. Der Rest ist Geschmack ohne schlechtes Gewissen. Nicht, weil es gut für Sie ist. Sondern weil es gut ist."
     },
     "story": {
+      "eyebrow": "Est. 2025",
       "title": "Unsere Geschichte",
       "desc": "TOMO entstand aus einer gemeinsamen Vision: Essen, das Sinn macht. Wir glauben daran, gut zu essen, um gut zu leben.",
       "link": "Mehr über TOMO"
     },
     "location": {
+      "eyebrow": "Standort",
       "title": "Besuchen Sie uns",
       "addressLabel": "Adresse",
       "hoursLabel": "Öffnungszeiten",

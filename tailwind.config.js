@@ -19,7 +19,7 @@ export default {
       },
       fontFamily: {
         sans: ['Montserrat', 'sans-serif'],
-        display: ['Bernoru', 'Montserrat', 'sans-serif'], // Fallback to Montserrat if Bernoru not loaded
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
       }
     },
   },

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { useTouchSwipe } from '../../hooks/useTouchSwipe';
+import { SectionHeader } from '../ui/SectionHeader';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import imgInteriorMoss from '../../../assets/photos/tomo-interior-moss.png';
@@ -10,22 +11,29 @@ import imgDishPesto from '../../../assets/photos/tomo-dish-pesto.jpeg';
 import imgDishCaviarSetting from '../../../assets/photos/tomo-dish-caviar-setting.jpeg';
 import imgDishesOverhead from '../../../assets/photos/tomo-dishes-overhead.jpeg';
 import imgDishTartare from '../../../assets/photos/tomo-dish-tartare.jpeg';
+import imgDishMural from '../../../assets/photos/tomo-dish-mural.jpeg';
+import imgFoodTasting from '../../../assets/photos/tomo-food-tasting.png';
 import imgCheers from '../../../assets/photos/tomo-cheers.png';
 
 const IMAGES = [
   imgInteriorMoss,
   imgStorefront,
   imgDishCaviar,
+  imgDishMural,
   imgDishPesto,
   imgDishCaviarSetting,
   imgDishesOverhead,
   imgDishTartare,
+  imgFoodTasting,
   imgCheers,
 ];
+
+const AUTO_ADVANCE_MS = 5000;
 
 export const Gallery = () => {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -39,7 +47,6 @@ export const Gallery = () => {
     setCurrentIndex((prev) => (prev - 1 + IMAGES.length) % IMAGES.length);
   }, []);
 
-  /* Lightbox navigation */
   const lightboxNext = useCallback(() => {
     setSelectedIndex((prev) => (prev !== null ? (prev + 1) % IMAGES.length : null));
   }, []);
@@ -48,11 +55,21 @@ export const Gallery = () => {
     setSelectedIndex((prev) => (prev !== null ? (prev - 1 + IMAGES.length) % IMAGES.length : null));
   }, []);
 
-  /* Touch swipe for carousel */
   const carouselSwipe = useTouchSwipe({ onSwipeLeft: nextSlide, onSwipeRight: prevSlide });
-
-  /* Touch swipe for lightbox */
   const lightboxSwipe = useTouchSwipe({ onSwipeLeft: lightboxNext, onSwipeRight: lightboxPrev });
+
+  /* Auto-advance slides. Pauses on hover/focus, during touch interaction,
+     when the lightbox is open, and when prefers-reduced-motion is set. */
+  useEffect(() => {
+    if (isPaused || selectedIndex !== null) return;
+    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    if (reduced) return;
+
+    const id = window.setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % IMAGES.length);
+    }, AUTO_ADVANCE_MS);
+    return () => window.clearInterval(id);
+  }, [isPaused, selectedIndex]);
 
   /* Accessibility: modal keyboard navigation (Escape, Tab trap, arrow keys for prev/next) */
   useEffect(() => {
@@ -95,73 +112,94 @@ export const Gallery = () => {
     };
   }, [selectedIndex, lightboxNext, lightboxPrev]);
 
-  const getVisibleImages = () => {
-    const secondIndex = (currentIndex + 1) % IMAGES.length;
-    return [IMAGES[currentIndex], IMAGES[secondIndex]];
-  };
+  /* A crossfading slot: renders every image stacked absolutely,
+     fades the one at `activeIndex` to full opacity while the rest fade out.
+     Plain helper (not a component) so React does not remount on every render
+     and kill in-flight opacity transitions. */
+  const renderSlot = (activeIndex: number, aspectClass: string) => (
+    <div className={`relative w-full ${aspectClass} rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/5`}>
+      {IMAGES.map((img, i) => {
+        const isActive = i === activeIndex;
+        return (
+          <button
+            key={i}
+            type="button"
+            aria-label={`Open gallery image ${i + 1}`}
+            aria-hidden={!isActive}
+            tabIndex={isActive ? 0 : -1}
+            onClick={() => isActive && setSelectedIndex(i)}
+            className={`absolute inset-0 bg-transparent border-0 p-0 transition-opacity duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+              isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+            }`}
+          >
+            <img
+              src={img}
+              alt={`Gallery ${i + 1}`}
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
+            {/* Subtle gradient lift on the image to unify with the dark section */}
+            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+          </button>
+        );
+      })}
+    </div>
+  );
+
+  const secondIndex = (currentIndex + 1) % IMAGES.length;
 
   return (
-    <section className="py-24 bg-gray-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 data-reveal="float" className="text-4xl md:text-5xl font-display font-bold text-tomo-dark">
-            {t.home.gallery.title}
-          </h2>
-        </div>
+    <section
+      className="relative overflow-hidden py-28 md:py-36 bg-tomo-dark text-tomo-cream"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* Ambient wash: warm spot + cool edge */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(1100px 520px at 50% -5%, rgba(255,248,240,0.10), rgba(255,248,240,0) 60%), radial-gradient(800px 600px at 15% 100%, rgba(47,74,60,0.55), rgba(47,74,60,0) 65%)',
+        }}
+      />
 
-        <div className="relative group" {...carouselSwipe}>
-          {/* Carousel Container */}
-          <div className="flex gap-4 md:gap-8 overflow-hidden">
-            {/* Mobile: 1 image */}
-            <button
-              type="button"
-              aria-label={`Open gallery image ${currentIndex + 1}`}
-              className="md:hidden w-full aspect-[4/3] relative rounded-2xl overflow-hidden cursor-pointer bg-transparent border-0 p-0"
-              onClick={() => setSelectedIndex(currentIndex)}
-            >
-              <img 
-                src={IMAGES[currentIndex]} 
-                alt="Gallery" 
-                loading="lazy"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </button>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          variant="dark"
+          eyebrow={t.home.gallery.title}
+          title={t.home.gallery.subtitle}
+          className="mb-14"
+        />
 
-            {/* Desktop: 2 images */}
-            <div className="hidden md:flex w-full gap-8">
-              {getVisibleImages().map((img, idx) => {
-                const imgIndex = (currentIndex + idx) % IMAGES.length;
-                return (
-                  <button
-                    type="button"
-                    key={`${currentIndex}-${idx}`} 
-                    aria-label={`Open gallery image ${imgIndex + 1}`}
-                    className="w-1/2 aspect-[16/9] relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow bg-transparent border-0 p-0"
-                    onClick={() => setSelectedIndex(imgIndex)}
-                  >
-                    <img 
-                      src={img} 
-                      alt={`Gallery ${imgIndex + 1}`} 
-                      loading="lazy"
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                    />
-                  </button>
-                );
-              })}
-            </div>
+        <div
+          className="relative group"
+          onFocusCapture={() => setIsPaused(true)}
+          onBlurCapture={() => setIsPaused(false)}
+          {...carouselSwipe}
+        >
+          {/* Mobile: 1 slot */}
+          <div className="md:hidden">
+            {renderSlot(currentIndex, 'aspect-[4/3]')}
           </div>
 
-          {/* Navigation Buttons */}
-          <button 
+          {/* Desktop: 2 slots side-by-side */}
+          <div className="hidden md:grid md:grid-cols-2 md:gap-8">
+            {renderSlot(currentIndex, 'aspect-[16/9]')}
+            {renderSlot(secondIndex, 'aspect-[16/9]')}
+          </div>
+
+          {/* Navigation */}
+          <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-tomo-dark p-3 rounded-full shadow-lg backdrop-blur-sm transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
+            className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-20 bg-white/95 hover:bg-white text-tomo-dark p-3 rounded-full shadow-xl backdrop-blur transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
             aria-label="Previous image"
           >
             <ChevronLeft size={24} />
           </button>
-          <button 
+          <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-tomo-dark p-3 rounded-full shadow-lg backdrop-blur-sm transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
+            className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-20 bg-white/95 hover:bg-white text-tomo-dark p-3 rounded-full shadow-xl backdrop-blur transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
             aria-label="Next image"
           >
             <ChevronRight size={24} />
@@ -169,13 +207,13 @@ export const Gallery = () => {
         </div>
 
         {/* Indicators */}
-        <div className="flex justify-center mt-8 gap-2">
+        <div className="flex justify-center mt-10 gap-2">
           {IMAGES.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                idx === currentIndex ? 'bg-tomo-red w-6' : 'bg-tomo-gray/30 hover:bg-tomo-gray/50'
+              className={`h-1.5 rounded-full transition-all duration-500 ${
+                idx === currentIndex ? 'bg-tomo-red w-8' : 'bg-tomo-cream/25 hover:bg-tomo-cream/50 w-2'
               }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
@@ -183,18 +221,18 @@ export const Gallery = () => {
         </div>
       </div>
 
-      {/* Lightbox Modal — now with prev/next navigation + swipe + keyboard arrows */}
+      {/* Lightbox Modal */}
       {selectedIndex !== null && (
         <div
           ref={modalRef}
           role="dialog"
           aria-modal="true"
           aria-label="Gallery image preview"
-          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] bg-black/92 backdrop-blur-sm flex items-center justify-center p-4 animate-[reveal-fade-in_250ms_ease-out]"
           onClick={() => setSelectedIndex(null)}
           {...lightboxSwipe}
         >
-          <button 
+          <button
             ref={closeButtonRef}
             type="button"
             onClick={(e) => { e.stopPropagation(); setSelectedIndex(null); }}
@@ -204,7 +242,6 @@ export const Gallery = () => {
             <X size={40} />
           </button>
 
-          {/* Prev */}
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); lightboxPrev(); }}
@@ -214,14 +251,13 @@ export const Gallery = () => {
             <ChevronLeft size={28} />
           </button>
 
-          <img 
-            src={IMAGES[selectedIndex]} 
+          <img
+            src={IMAGES[selectedIndex]}
             alt={`Gallery image ${selectedIndex + 1}`}
             className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           />
 
-          {/* Next */}
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); lightboxNext(); }}
@@ -231,7 +267,6 @@ export const Gallery = () => {
             <ChevronRight size={28} />
           </button>
 
-          {/* Counter */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-sm font-medium">
             {selectedIndex + 1} / {IMAGES.length}
           </div>

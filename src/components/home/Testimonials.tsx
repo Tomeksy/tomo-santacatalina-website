@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { useTouchSwipe } from '../../hooks/useTouchSwipe';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { SectionHeader } from '../ui/SectionHeader';
+import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 import { reviews } from '../../data/reviews';
 
 // Max characters shown before the "Read more" toggle kicks in.
@@ -17,9 +18,12 @@ const GoogleLogo = () => (
   </svg>
 );
 
+const FADE_MS = 320;
+
 export const Testimonials = () => {
   const { t, language } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
 
   // Reviews are sorted by id (lowest = newest).
   const sorted = [...reviews].sort((a, b) => a.id - b.id);
@@ -60,13 +64,21 @@ export const Testimonials = () => {
     return formatter.format(-diffDays, 'day');
   };
 
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % sorted.length);
-  }, [sorted.length]);
+  /* Crossfade transition: fade current cards out, then swap the index, then fade in.
+     The total feel is ~640ms (320 out + 320 in) which keeps motion responsive (HIG micro-interaction band). */
+  const goTo = useCallback(
+    (direction: 1 | -1) => {
+      setIsFading(true);
+      window.setTimeout(() => {
+        setCurrentIndex((prev) => (prev + direction + sorted.length) % sorted.length);
+        setIsFading(false);
+      }, FADE_MS);
+    },
+    [sorted.length]
+  );
 
-  const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + sorted.length) % sorted.length);
-  }, [sorted.length]);
+  const nextSlide = useCallback(() => goTo(1), [goTo]);
+  const prevSlide = useCallback(() => goTo(-1), [goTo]);
 
   const swipeHandlers = useTouchSwipe({ onSwipeLeft: nextSlide, onSwipeRight: prevSlide });
 
@@ -98,42 +110,49 @@ export const Testimonials = () => {
       : review.text;
 
     return (
-      <div className="bg-white p-8 rounded-xl shadow-md flex flex-col border border-gray-100">
+      <div className="relative bg-white p-8 md:p-9 rounded-2xl shadow-xl shadow-tomo-dark/5 flex flex-col border border-tomo-cream ring-1 ring-black/[0.03] overflow-hidden">
+        {/* Decorative serif quotation mark */}
+        <Quote
+          aria-hidden="true"
+          className="absolute -top-2 -right-2 w-24 h-24 text-tomo-red/5 rotate-180"
+          strokeWidth={1}
+        />
+
         {/* Header: avatar, profile meta, Google mark. */}
-        <div className="flex items-center gap-4 mb-4">
-          <div className={`w-10 h-10 rounded-full ${getAvatarColor(review.author)} flex-shrink-0 flex items-center justify-center text-white font-bold text-sm`}>
+        <div className="relative flex items-center gap-4 mb-4">
+          <div className={`w-10 h-10 rounded-full ${getAvatarColor(review.author)} flex-shrink-0 flex items-center justify-center text-white font-bold text-sm ring-2 ring-white`}>
             {review.author.charAt(0)}
           </div>
           <div className="min-w-0">
-            <h4 className="font-bold text-gray-900 text-sm truncate">{review.author}</h4>
-            <span className="text-xs text-gray-500">{reviewerMeta}</span>
+            <h4 className="font-bold text-tomo-dark text-sm truncate">{review.author}</h4>
+            <span className="text-xs text-tomo-gray/70">{reviewerMeta}</span>
           </div>
           <GoogleLogo />
         </div>
 
         {/* Rating + recency. */}
-        <div className="flex items-center gap-1 mb-3">
+        <div className="relative flex items-center gap-1 mb-3">
           {[...Array(5)].map((_, i) => (
             <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
           ))}
-          <span className="text-xs text-gray-500 ml-2">{getRelativeDateLabel(review.timeAgoLabel)}</span>
+          <span className="text-xs text-tomo-gray/70 ml-2">{getRelativeDateLabel(review.timeAgoLabel)}</span>
         </div>
 
         {/* Optional visit/price context. */}
         {visitMeta ? (
-          <p className="text-xs text-gray-500 mb-3">{visitMeta}</p>
+          <p className="relative text-xs text-tomo-gray/70 mb-3">{visitMeta}</p>
         ) : null}
 
         {/* Review text with truncation toggle. */}
-        <div className="flex-grow">
-          <p className="text-gray-700 leading-relaxed text-sm whitespace-pre-line">
+        <div className="relative flex-grow">
+          <p className="text-tomo-gray leading-relaxed text-sm whitespace-pre-line">
             {displayText}
           </p>
           {needsTruncation ? (
             <button
               type="button"
               onClick={() => setIsExpanded((v) => !v)}
-              className="mt-1 text-xs font-medium text-tomo-red hover:underline focus:outline-none"
+              className="mt-1 text-xs font-semibold tracking-wide uppercase text-tomo-red hover:underline focus:outline-none"
             >
               {isExpanded ? 'Show less' : 'Read more'}
             </button>
@@ -142,7 +161,7 @@ export const Testimonials = () => {
 
         {/* Optional ratings summary pill. */}
         {review.ratingsLabel ? (
-          <div className="mt-4 rounded-2xl bg-gray-100 px-4 py-3 text-sm font-semibold text-gray-700">
+          <div className="relative mt-4 rounded-xl bg-tomo-cream px-4 py-3 text-sm font-semibold text-tomo-gray border border-tomo-cream">
             {review.ratingsLabel}
           </div>
         ) : null}
@@ -151,20 +170,30 @@ export const Testimonials = () => {
   };
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-tomo-cream relative overflow-hidden">
+      {/* Ambient warm glow — keeps the cream surface from reading flat */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(1000px 500px at 80% 0%, rgba(218,36,14,0.06), rgba(218,36,14,0) 60%), radial-gradient(900px 600px at 10% 100%, rgba(47,74,60,0.05), rgba(47,74,60,0) 60%)',
+        }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <h2 data-reveal="float" className="text-4xl md:text-5xl font-display font-bold text-tomo-dark mb-4">
-            {t.home.testimonials.title}
-          </h2>
-          <p className="text-xl text-tomo-gray max-w-2xl mx-auto">
-            {t.home.testimonials.subtitle}
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow={t.home.testimonials.eyebrow}
+          title={t.home.testimonials.title}
+          subtitle={t.home.testimonials.subtitle}
+          className="mb-16"
+        />
 
         <div className="relative max-w-5xl mx-auto">
           <div className="overflow-hidden py-4" {...swipeHandlers}>
-            <div className="flex gap-8">
+            <div
+              className="flex gap-8 transition-opacity ease-out"
+              style={{ transitionDuration: `${FADE_MS}ms`, opacity: isFading ? 0 : 1 }}
+            >
               {/* Mobile: 1 review */}
               <div className="md:hidden w-full flex-shrink-0">
                 <ReviewCard review={sorted[currentIndex]} />

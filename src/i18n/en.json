@@ -28,13 +28,16 @@
       }
     },
     "gallery": {
-      "title": "Gallery"
+      "title": "Gallery",
+      "subtitle": "A Taste of TOMO"
     },
     "testimonials": {
+      "eyebrow": "Reviews",
       "title": "How does it Taste?",
       "subtitle": "Don't take it from us - Hear what our customers say"
     },
     "philosophy": {
+      "eyebrow": "Philosophy",
       "title": "The Trinity of Taste",
       "subtitle": "Simple ingredients, elevated to perfection.",
       "card1": {
@@ -51,6 +54,7 @@
       }
     },
     "experience": {
+      "eyebrow": "Atmosphere",
       "title": "A Place With Character",
       "desc": "Icelandic and bun moss by MoosMoos — Art by Juri that you won't find anywhere else and Food that tastes like a guilty pleasure, but isn't.",
       "feature1": "Living Moss by MoosMoos",
@@ -64,11 +68,13 @@
       "body": "We started TOMO with a simple question: why does healthy food have to be boring? We believe eating well shouldn't taste like a sacrifice. So we built TOMO around one idea: 100% natural ingredients, zero compromises on flavor.\n\nOur answer is on the menu — fresh, protein-rich dishes that feel indulgent but aren't. Tomato, mozzarella, pesto as the foundation. The rest is flavor without guilt. Not because it's good for you. Because it's good."
     },
     "story": {
+      "eyebrow": "Est. 2025",
       "title": "Our Story",
       "desc": "TOMO was born from a shared vision: food that makes sense. We believe in eating well to live well.",
       "link": "More About TOMO"
     },
     "location": {
+      "eyebrow": "Location",
       "title": "Visit Us",
       "addressLabel": "Address",
       "hoursLabel": "Hours",

@@ -28,13 +28,16 @@
       }
     },
     "gallery": {
-      "title": "Galería"
+      "title": "Galería",
+      "subtitle": "Un Sabor de TOMO"
     },
     "testimonials": {
+      "eyebrow": "Reseñas",
       "title": "¿Cómo sabe?",
       "subtitle": "No te fíes solo de nosotros - Escucha a nuestros clientes"
     },
     "philosophy": {
+      "eyebrow": "Filosofía",
       "title": "La Trinidad del Sabor",
       "subtitle": "Ingredientes simples, elevados a la perfección.",
       "card1": {
@@ -51,6 +54,7 @@
       }
     },
     "experience": {
+      "eyebrow": "Atmósfera",
       "title": "Un Lugar con Carácter",
       "desc": "Musgo islandés y musgo bun de MoosMoos — arte de Juri que no encontrarás en ningún otro lugar y comida que sabe a placer culpable, pero no lo es.",
       "feature1": "Musgo vivo de MoosMoos",
@@ -64,11 +68,13 @@
       "body": "Empezamos TOMO con una pregunta simple: ¿por qué la comida saludable tiene que ser aburrida? Creemos que comer bien no debería saber a sacrificio. Por eso construimos TOMO sobre una idea: ingredientes 100% naturales, cero concesiones en sabor.\n\nNuestra respuesta está en el menú: platos frescos, ricos en proteína, que se sienten indulgentes sin serlo. Tomate, mozzarella y pesto como base. El resto es sabor sin culpa. No porque sea bueno para ti. Porque es bueno."
     },
     "story": {
+      "eyebrow": "Est. 2025",
       "title": "Nuestra Historia",
       "desc": "TOMO nació de una visión compartida: comida con sentido. Creemos en comer bien para vivir bien.",
       "link": "Leer más sobre TOMO"
     },
     "location": {
+      "eyebrow": "Ubicación",
       "title": "Visítanos",
       "addressLabel": "Dirección",
       "hoursLabel": "Horario",

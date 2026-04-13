@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
 import heroImg from '../../../assets/photos/tomo-interior-moss.png';
 import { ArrowRight } from 'lucide-react';
@@ -5,18 +6,50 @@ import { ArrowRight } from 'lucide-react';
 export const Hero = () => {
   const { t } = useTranslation();
   const [titleLine1] = t.home.hero.title.split('\n');
+  const [parallaxY, setParallaxY] = useState(0);
+
+  /* Subtle scroll-driven parallax on the hero image. Capped at 80px and
+     bypassed entirely when the user prefers reduced motion. */
+  useEffect(() => {
+    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    if (reduced) return;
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const y = Math.min(window.scrollY * 0.25, 120);
+        setParallaxY(y);
+        ticking = false;
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Desktop viewport contract: keep hero height to viewport minus header so the first fold remains fully hero.
   return (
     <section className="relative min-h-screen lg:min-h-[calc(100vh-6rem)] supports-[height:100svh]:lg:min-h-[calc(100svh-6rem)] flex items-center justify-center overflow-hidden">
-      {/* Background with Overlay */}
+      {/* Background with Overlay — slight over-scale to hide parallax edges */}
       <div className="absolute inset-0 z-0">
-        <img 
+        <img
           src={heroImg}
           alt="TOMO interior with moss wall"
-          className="w-full h-full object-cover"
+          className="w-full h-[115%] -top-[7.5%] absolute left-0 object-cover will-change-transform"
+          style={{ transform: `translate3d(0, ${parallaxY}px, 0)` }}
         />
-        <div className="absolute inset-0 bg-tomo-dark/40 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-tomo-dark/45 backdrop-blur-[2px]"></div>
+        {/* Top + bottom vignette for extra depth */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(1200px 600px at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 100%)',
+          }}
+        />
       </div>
 
       {/* Content */}
