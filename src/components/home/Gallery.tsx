@@ -150,7 +150,7 @@ export const Gallery = () => {
 
   return (
     <section
-      className="relative overflow-hidden py-28 md:py-36 bg-tomo-dark text-tomo-cream"
+      className="relative overflow-hidden py-28 md:py-36 bg-tomo-moss text-tomo-cream"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

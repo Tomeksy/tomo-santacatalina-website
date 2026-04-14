@@ -10,7 +10,7 @@ export default {
         tomo: {
           red: '#DA240E',
           green: '#48BB78',
-          cream: '#FFF8F0',
+          cream: '#E5E7EB',
           moss: '#2F4A3C',
           dark: '#111827',
           gray: '#374151',

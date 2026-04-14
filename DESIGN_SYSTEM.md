@@ -19,7 +19,7 @@ Three surface tiers alternate to create rhythm. Never mix more than two on a sin
 | Token | Hex | Role | When to use |
 |---|---|---|---|
 | `tomo-white` | `#FFFFFF` | Primary light surface | Content-dense sections (Introduction, Philosophy, Story) |
-| `tomo-cream` | `#FFF8F0` | Warm alt surface | Softer breaks (Testimonials, Experience, Location) |
+| `tomo-cream` | `#E5E7EB` | Cool gray alt surface | Softer breaks (Testimonials, Experience, Location) |
 | `tomo-moss` | `#2F4A3C` | Dark editorial surface | Deep breaks and signature moments (Concept, Footer) |
 | `tomo-dark` | `#111827` | Ink / richest dark | Gallery dark stage, primary body text |
 | `tomo-red` | `#DA240E` | Brand accent / CTA | Buttons, active nav, accent strokes, hover glows |
@@ -31,7 +31,7 @@ Three surface tiers alternate to create rhythm. Never mix more than two on a sin
 ```
 Hero            dark moss (image)
 Introduction    white
-Gallery         tomo-dark
+Gallery         tomo-moss
 Testimonials    tomo-cream
 Philosophy      white
 Experience      tomo-cream
