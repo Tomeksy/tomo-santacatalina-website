@@ -47,7 +47,7 @@ export const Philosophy = () => {
               <div className={`${card.iconBg} p-4 rounded-full mb-6 transition-transform duration-500 ease-out group-hover:scale-110`}>
                 {card.icon}
               </div>
-              <h3 className="text-2xl font-display font-semibold italic text-tomo-dark mb-3">
+              <h3 className="text-2xl font-display font-semibold text-tomo-dark mb-3">
                 {card.title}
               </h3>
               <p className="text-tomo-gray leading-relaxed">

@@ -36,7 +36,7 @@ export const Footer = () => {
                 Santa Catalina · Palma
               </span>
             </div>
-            <h3 className="font-display font-bold italic text-5xl tracking-tight text-tomo-cream mb-4">
+            <h3 className="font-display font-bold text-5xl tracking-tight text-tomo-cream mb-4">
               TOMO
             </h3>
             <p className="text-tomo-cream/70 font-display italic text-lg max-w-xs leading-snug">

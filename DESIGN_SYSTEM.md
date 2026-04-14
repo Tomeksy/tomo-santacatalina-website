@@ -7,7 +7,7 @@ Modern Mediterranean editorial — premium but unfussy. Every choice below is al
 ## 1. Brand tone
 
 - **Voice:** confident, warm, a little playful. Never corporate, never precious.
-- **Look:** editorial magazine meets neighborhood bistro. Italic serifs for emotion, sans-serif for clarity, generous whitespace, occasional deep-dark breaks.
+- **Look:** editorial magazine meets neighborhood bistro. Upright display serif for presence, sans-serif for clarity, generous whitespace, occasional deep-dark breaks.
 - **Do not:** use stock illustrations, emoji as icons, drop shadows without intent, gradients that look like 2012 web 2.0.
 
 ---
@@ -50,26 +50,28 @@ No two identical surfaces in a row.
 
 ### Fonts
 
-- **Display:** `Playfair Display` — variable, `400..900`, italic enabled. Loaded via Google Fonts.
-- **Sans:** `Montserrat` — `400, 500, 600, 700`. Loaded via Google Fonts.
-- **Fallback chain:** `'Playfair Display', Georgia, serif` for display; `Montserrat, sans-serif` for body.
+- **Display:** `DM Serif Display` — single weight (400), upright + italic cut. Loaded via Google Fonts. Used upright for all headings; the italic cut is reserved for non-heading editorial accents (pull quotes, taglines).
+- **Sans:** `Montserrat` — `300, 400, 500, 600, 700, 800`. Loaded via Google Fonts.
+- **Fallback chain:** `'DM Serif Display', Georgia, serif` for display; `Montserrat, sans-serif` for body.
 
 ### Type scale
 
 | Role | Size | Weight | Style | Family |
 |---|---|---|---|---|
-| Hero headline | `clamp(2.5rem, 8vw, 5.75rem)` | 700 | upright | display |
-| Section heading (h2) | `text-4xl md:text-5xl` (36/48px) | 600 | **italic** | display |
-| Sub-section (h3) | `text-2xl md:text-3xl` (24/30px) | 700 | upright | display |
+| Hero headline | `clamp(2.5rem, 8vw, 5.75rem)` | 400 (DM Serif is single-weight) | upright | display |
+| Section heading (h2) | `text-4xl md:text-5xl` (36/48px) | 400 | upright | display |
+| Sub-section (h3) | `text-2xl md:text-3xl` (24/30px) | 400 | upright | display |
 | Body large | `text-lg md:text-xl` (18/20px) | 400 | upright | sans |
 | Body | `text-base` (16px) | 400 | upright | sans |
 | Eyebrow label | `text-xs` (12px) | 600 | upright, **`tracking-[0.3em] uppercase`** | sans |
 | Button | `text-base / text-lg` | 500–600 | upright | sans |
 | Tabular / counter | `tabular-nums text-sm` | 500 | upright | sans |
 
-**Non-negotiable:** section h2 is serif italic. This is the editorial hook that ties every page together.
+**Non-negotiable:** all headings render upright in DM Serif Display. Italic is reserved for editorial pull quotes / taglines on `<p>` elements, never on `<h*>`.
 
 **Line heights:** 1.05–1.1 for display, 1.5 for body, 1.7 for editorial pull quotes.
+
+**Weight note:** DM Serif Display ships a single weight. `font-bold` / `font-semibold` classes on display headings are no-ops and have been removed from the base layer rule. Weight hierarchy now relies on size + color + tracking, not stroke thickness.
 
 ---
 
@@ -114,13 +116,13 @@ The editorial signature. Every major section uses this.
 
 ```
 [ — ] EYEBROW LABEL [ — ]
-    Italic Serif H2
+    Upright Serif H2
      small subtitle
 ```
 
 - Eyebrow: sans, `tracking-[0.3em] uppercase text-xs`, flanked by `h-px w-10 bg-current opacity-30` rules.
-- H2: serif italic, `text-4xl md:text-5xl font-semibold`.
-- Subtitle: optional, italic serif, `text-lg md:text-xl opacity-70`.
+- H2: DM Serif Display upright, `text-4xl md:text-5xl leading-[1.1]`.
+- Subtitle: optional, sans, `text-lg md:text-xl opacity-70`.
 - Implemented in `src/components/ui/SectionHeader.tsx` with `variant="light" | "dark"`.
 
 ### Card
@@ -181,7 +183,7 @@ The editorial signature. Every major section uses this.
 
 **Do**
 - Alternate surfaces — never two whites in a row.
-- Use italic serif for section headings. Every time.
+- Use DM Serif Display upright for section headings. Every time.
 - Add texture to dark surfaces (noise + radial wash).
 - Stagger revealing lists.
 - Put a red glow on hover for elevated cards.

@@ -1,5 +1,5 @@
 /* Editorial section header — the signature pattern used across every major section.
-   Eyebrow with accent rules, italic serif h2, optional subtitle.
+   Eyebrow with accent rules, upright serif h2, optional subtitle.
    Variants swap the color ramp for light vs dark surfaces. */
 
 type Variant = 'light' | 'dark';
@@ -57,7 +57,7 @@ export const SectionHeader = ({
 
       <h2
         data-reveal="float"
-        className={`text-4xl md:text-5xl font-display font-semibold italic leading-[1.1] ${c.title}`}
+        className={`text-4xl md:text-5xl font-display leading-[1.1] ${c.title}`}
       >
         {title}
       </h2>
@@ -65,7 +65,7 @@ export const SectionHeader = ({
       {subtitle ? (
         <p
           data-reveal="fade"
-          className={`font-display italic text-lg md:text-xl mt-5 max-w-2xl ${
+          className={`font-sans text-lg md:text-xl mt-5 max-w-2xl ${
             isCenter ? 'mx-auto' : ''
           } ${c.subtitle}`}
         >

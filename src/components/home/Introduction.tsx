@@ -41,7 +41,7 @@ export const Introduction = () => {
               </div>
               <h3
                 data-reveal="underline"
-                className="text-3xl md:text-4xl font-display font-bold italic text-tomo-dark mb-6 leading-tight"
+                className="text-3xl md:text-4xl font-display font-bold text-tomo-dark mb-6 leading-tight"
               >
                 <span className="relative inline-block">
                   {t.home.introduction.col1.subtitle}
@@ -93,7 +93,7 @@ export const Introduction = () => {
               </div>
               <h3
                 data-reveal="underline"
-                className="text-3xl md:text-4xl font-display font-bold italic text-tomo-dark mb-6 leading-tight"
+                className="text-3xl md:text-4xl font-display font-bold text-tomo-dark mb-6 leading-tight"
               >
                 <span className="relative inline-block">
                   {t.home.introduction.col2.subtitle}
